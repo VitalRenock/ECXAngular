@@ -1,0 +1,16 @@
+<nb-card *ngFor="let u of userList">
+
+    <nb-card-header>{{u.id}}: {{u.nickname}}</nb-card-header>
+    <nb-card-body>
+        <strong>{{u.role}}</strong>
+        <p>{{u.firstname}} {{u.lastname}}</p>
+        
+        <select formControlName="testRole">
+            <option *ngFor="let r of roleList" [value]="r.id">{{r.name}}</option>
+        </select>
+        <!-- TO DO
+        Essayer de faire une liste permettant de changer le role du user -->
+        <!-- <form (ngSubmit)="setRole()"></form> -->
+    </nb-card-body>
+
+</nb-card>

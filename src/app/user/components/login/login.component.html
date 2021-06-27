@@ -1,1 +1,21 @@
-<p>login works!</p>
+<form [formGroup]="loginFG" (ngSubmit)="login()">
+
+    <nb-card>
+
+        <nb-card-header>Login</nb-card-header>
+
+        <nb-card-body>
+            <label for="">Email: </label>
+            <input nbInput type="text" formControlName="emailControl">
+            <br>
+            <label for="">Password: </label>
+            <input nbInput type="password" formControlName="passwordControl">
+        </nb-card-body>
+
+        <nb-card-footer>
+            <button nbButton type="submit">Envoyer</button>
+        </nb-card-footer>
+
+    </nb-card>
+
+</form>

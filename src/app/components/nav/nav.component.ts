@@ -18,8 +18,9 @@ export class NavComponent implements OnInit {
     this.menuList = [
       {
         title: 'User', icon: 'people', children: [
-          { link: '/user/login', title: 'Login', icon:'log-in' },
-          { link: '/user/register', title: 'Register', icon:'save' }
+          { link: '/user/login', title: 'Connexion', icon:'log-in' },
+          { link: '/user/register', title: 'S\'enregister', icon:'save' },
+          { link: '/user/get-all', title: 'Utilisateurs', icon:'people' },
         ]
       }
     ]
