@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { of } from 'rxjs/internal/observable/of';
 import { environment } from 'src/environments/environment';
 import { Role } from '../models/role';
 
@@ -11,11 +12,13 @@ export class RoleService {
 
   urlController : string = 'Role/'
 
+
   constructor(
 
-    private httpClient : HttpClient
+    private httpClient : HttpClient,
 
   ) { }
+
 
   getAll() : Observable<Role[]> {
     

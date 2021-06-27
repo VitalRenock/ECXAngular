@@ -14,20 +14,19 @@ export class UserService {
   // Morceau d'url pointant vers le contro
   private urlController : string = 'User/'
 
+
   constructor(
 
     // Déclaration d'un HttpClient pour communiquer avec l'API
     private httpClient : HttpClient
-
   ) { }
 
   // Méthode de Login d'un User
   login(email : string, password : string) : Observable<User> {
     
-    // Paramètre à envoyé (Passage au format JSON)
-    let user = { email : email, password : password }
-    
-    return this.httpClient.post<User>(environment.urlApi + this.urlController + 'Login', user)
+    // Formulaire à envoyé (Passage au format JSON)
+    let form = { email : email, password : password }
+    return this.httpClient.post<User>(environment.urlApi + this.urlController + 'Login', form)
   }
 
   getAll() : Observable<User[]> {
@@ -35,10 +34,11 @@ export class UserService {
     return this.httpClient.get<User[]>(environment.urlApi + this.urlController + 'GetAll')
   }
 
-  // TO DO
-  // Essayer de faire une liste permettant de changer le role du user
-  setRole() {
+  setRole(user_id : number, roleName : string) {
 
+    // Formulaire à envoyé (Passage au format JSON)
+    let form = { User_Id: user_id, Role_Name: roleName };
+    this.httpClient.post(environment.urlApi + this.urlController + 'SetRole', form);
   }
 
 }
