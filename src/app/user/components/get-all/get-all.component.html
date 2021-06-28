@@ -1,4 +1,4 @@
-<nb-card *ngFor="let u of userList;">
+<nb-card *ngFor="let u of userList; let id = index">
 
     <nb-card-header>{{u.id}}: {{u.nickname}}</nb-card-header>
 
@@ -6,15 +6,15 @@
         <strong>{{u.role}}</strong>
         <p>{{u.firstname}} {{u.lastname}}</p>
         
-        <nb-select placeholder="{{u.role}}" (selectedChange)="setRole(u.id, $event)">
+        <nb-select id="{{id}}" placeholder="{{u.role}}">
 
             <nb-option *ngFor="let r of roleList" [value]="r.name">
               {{r.name}}
             </nb-option>
 
         </nb-select>
-
-        <button nbButton status="primary" (click)="setRole(u.id, choice)">Définir Rôle</button>
+        
+        <button nbButton status="primary"  (click)="setRole(id, u.id)">Définir Rôle</button>
 
     </nb-card-body>
 

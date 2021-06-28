@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { SharedRoutingModule } from './shared-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NbButtonModule, NbCardModule, NbInputModule, NbLayoutModule, NbListModule, NbSelectModule } from '@nebular/theme';
+import { NbButtonGroupModule, NbButtonModule, NbCardModule, NbInputModule, NbLayoutModule, NbListModule, NbSelectModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -24,20 +24,22 @@ import { HttpClientModule } from '@angular/common/http';
     NbInputModule,
     NbButtonModule,
     NbListModule,
-    NbSelectModule
+    NbSelectModule,
+    NbButtonGroupModule
   ],
   exports: [
-        // Exports des Modules afin de les rendres disponible dans l'application
-        FormsModule,
-        ReactiveFormsModule,
-        NbLayoutModule,
-        NbEvaIconsModule,
-        HttpClientModule,
-        NbCardModule,
-        NbInputModule,
-        NbButtonModule,
-        NbListModule,
-        NbSelectModule
+    // Exports des Modules afin de les rendres disponible dans l'application
+    FormsModule,
+    ReactiveFormsModule,
+    NbLayoutModule,
+    NbEvaIconsModule,
+    HttpClientModule,
+    NbCardModule,
+    NbInputModule,
+    NbButtonModule,
+    NbListModule,
+    NbSelectModule,
+    NbButtonGroupModule
   ]
 })
 export class SharedModule { }

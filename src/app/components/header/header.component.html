@@ -1,1 +1,12 @@
-<h3 class="redTest">Comp: Header</h3>
+<div class="headerMenu">
+
+    <h3  [routerLink]="['home']">ExtraCortex</h3>
+    
+    <nb-button-group ghost>
+        <button nbButtonToggle [routerLink]="['note/category']">Catégories</button>
+        <button nbButtonToggle [routerLink]="['note/category']">Notes</button>
+        <button nbButtonToggle>C</button>
+        <button nbButtonToggle>D</button>
+    </nb-button-group>
+
+</div>

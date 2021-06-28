@@ -34,11 +34,12 @@ export class UserService {
     return this.httpClient.get<User[]>(environment.urlApi + this.urlController + 'GetAll')
   }
 
-  setRole(user_id : number, roleName : string) {
+  setRole(userId : number, roleName : string) {
 
     // Formulaire à envoyé (Passage au format JSON)
-    let form = { User_Id: user_id, Role_Name: roleName };
-    this.httpClient.post(environment.urlApi + this.urlController + 'SetRole', form);
+    let form = { user_Id: userId, role_Name: roleName };
+
+    return this.httpClient.post(environment.urlApi + this.urlController + 'SetRole', form);
   }
 
 }

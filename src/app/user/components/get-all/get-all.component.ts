@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Role } from 'src/app/shared/models/role';
 import { User } from 'src/app/shared/models/user';
 import { RoleService } from 'src/app/shared/services/role.service';
@@ -14,8 +15,6 @@ export class GetAllComponent implements OnInit {
 
   userList : User[] = [];
   roleList : Role[] = [];
-
-  choice : string = "";
 
   fakeRoles : Role[] = 
   [
@@ -69,36 +68,43 @@ export class GetAllComponent implements OnInit {
       "role": "Rédacteur"
     }
   ];
-
+  
   constructor(
 
     // Injection du service User
     private userService : UserService,
-    private roleService : RoleService
+    private roleService : RoleService,
+    private router : Router
 
   ) { }
 
   ngOnInit(): void {
 
-    // this.userService.getAll().subscribe(
-    //   (users : User[]) => {
-    //     this.userList = users
-    //     console.log(users)
-    //   }
-    // );
+    this.userService.getAll().subscribe(
+      (users : User[]) => {
+        this.userList = users
+        console.log(users)
+      }
+    );
 
-    // this.roleService.getAll().subscribe(
-    //   (roles : Role[]) => {
-    //     this.roleList = roles
-    //   }
-    // );
+    this.roleService.getAll().subscribe(
+      (roles : Role[]) => {
+        this.roleList = roles
+      }
+    );
 
-    this.roleList = this.fakeRoles;
-    this.userList = this.fakeUsers;
+    // this.roleList = this.fakeRoles;
+    // this.userList = this.fakeUsers;
 
   }
+
   
-  setRole(userId? : number, roleName? : string) {
+  setRole(id : number, userId? : number,   roleName? : string) {
+
+    let roleSelect = document.getElementById(id.toString())
+
+    roleName = roleSelect?.innerText
+
 
     if (userId != null && userId != 0 && roleName != null) {
     }
@@ -107,7 +113,7 @@ export class GetAllComponent implements OnInit {
       return;
     }
     else if (userId == 0) {
-      console.log("setRole() =< userId ne peut être égal à zéro");
+      console.log("setRole() => userId ne peut être égal à zéro");
       return;
     }
     else if (roleName == null) {
@@ -115,8 +121,18 @@ export class GetAllComponent implements OnInit {
       return;
     }
 
-    // this.userService.setRole(userId, roleName);
-    console.log(userId, roleName);
+    this.userService.setRole(userId, roleName).subscribe(
+      () => { 
+        this.userService.getAll().subscribe(
+          (users : User[]) => {
+            this.userList = users;
+          }
+        );
+
+       }
+    );
+
+    
 
   }
 
