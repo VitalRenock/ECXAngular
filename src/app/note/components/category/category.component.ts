@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NoteService } from 'src/app/shared/services/note.service';
 
 @Component({
@@ -12,7 +13,8 @@ export class CategoryComponent implements OnInit {
 
   constructor(
 
-    private noteService : NoteService
+    private noteService : NoteService,
+    private router : Router
 
   ) { }
 
@@ -23,7 +25,10 @@ export class CategoryComponent implements OnInit {
         this.categories = c;
       }
     );
+  }
 
+  navigateToCategory(category : string) {
+    this.router.navigate(['public-notes/' + category])
   }
 
 }

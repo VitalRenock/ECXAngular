@@ -5,10 +5,14 @@
     <nb-card-body>
 
         <nb-card status="success" *ngFor="let c of categories">
-            <nb-card-header>{{c}}</nb-card-header>
-        </nb-card> 
+            <nb-card-header>
+                <!-- <div (click)="navigateToCategory(c)"> -->
+                <div [routerLink]="['../resolved/'+c]">
+                    {{c}}
+                </div>
+            </nb-card-header>
+        </nb-card>
 
     </nb-card-body>
-
 
 </nb-card>
