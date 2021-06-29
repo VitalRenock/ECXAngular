@@ -1,2 +1,20 @@
-<p>public-notes works!</p>
+<nb-card status="primary">
+    
+    <nb-card-header>Catégorie: {{category}}</nb-card-header>
+    
+    <nb-card-body>
+        
+        <nb-list>
+            <nb-list-item *ngFor="let n of notesPublic">
+                {{ n.title }}
+                <button nbButton [routerLink]="['../../public-note/' + n.id]">Voir</button>
+            </nb-list-item>
+        </nb-list>
+    
+    </nb-card-body>
 
+    <nb-card-footer>
+        <button nbButton [routerLink]="['../../category']">Retour</button>
+    </nb-card-footer>
+
+</nb-card>

@@ -31,8 +31,8 @@ export class LoginComponent implements OnInit {
 
     // Initialisation du formulaire et de tout ses champs (voir avec les retours de l'API)
     this.loginFG = this.fgBuilder.group({
-      emailControl: [null, Validators.required],
-      passwordControl: [null, Validators.required]
+      emailControl: ['renaud@mail.com', Validators.required],
+      passwordControl: ['test=1111', Validators.required]
     })
 
   }
@@ -46,12 +46,16 @@ export class LoginComponent implements OnInit {
       this.loginFG.value['passwordControl']
     ).subscribe(
       (userResponse : User) => {
-        // Sauvegarde du 'User' reçu dans le service 'User'
-        this.userService.currentUser = userResponse
-        console.log(userResponse)
-        // Redirection vers le Composant 'Home'
-        this.router.navigate(['home'])
-       }
+        console.log(userResponse);
+        this.router.navigate(['home']);
+      }
+      // (userResponse : User) => {
+      //   // Sauvegarde du 'User' reçu dans le service 'User'
+      //   this.userService.currentUser = userResponse
+      //   console.log(userResponse)
+      //   // Redirection vers le Composant 'Home'
+      //   this.router.navigate(['home'])
+      //  }
     )
   }
 

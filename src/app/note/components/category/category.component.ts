@@ -28,7 +28,7 @@ export class CategoryComponent implements OnInit {
   }
 
   navigateToCategory(category : string) {
-    this.router.navigate(['public-notes/' + category])
+    this.router.navigate(['note/public-notes/' + category])
   }
 
 }

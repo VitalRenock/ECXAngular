@@ -19,14 +19,34 @@ export class NoteService {
   ) { }
 
 
+  getAllNotes() : Observable<Note[]> {
+
+    return this.httpClient.get<Note[]>(environment.urlApi + this.urlController + 'GetAllNotes');
+  }
+
+  getAllUserNotes(userId : number) : Observable<Note[]> {
+
+    return this.httpClient.get<Note[]>(environment.urlApi + this.urlController + 'GetAllUserNotes/' + userId);
+  }
+
+  getPublicUserNotes(userId : number) : Observable<Note[]> {
+
+    return this.httpClient.get<Note[]>(environment.urlApi + this.urlController + 'GetPublicUserNotes/' + userId);
+  }
+
   getCategories() : Observable<string[]> {
 
     return this.httpClient.get<string[]>(environment.urlApi + this.urlController + 'GetCategories');
   }
-
+  
   getPublicNotesByCategory(category : string) : Observable<Note[]> {
-
+    
     return this.httpClient.get<Note[]>(environment.urlApi + this.urlController + 'GetPublicNotesByCategory/' + category);
+  }
+
+  getPublicNote(id : number) : Observable<Note> {
+
+    return this.httpClient.get<Note>(environment.urlApi + this.urlController + 'GetPublicNote/' + id);
   }
 
 }

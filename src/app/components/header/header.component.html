@@ -1,12 +1,14 @@
 <div class="headerMenu">
 
-    <h3  [routerLink]="['home']">ExtraCortex</h3>
+    <h3  [routerLink]="['home']">ExtraCortex {{currentUser.nickname}}</h3>
     
     <nb-button-group ghost>
         <button nbButtonToggle [routerLink]="['note/category']">Catégories</button>
-        <button nbButtonToggle [routerLink]="['note/category']">Notes</button>
-        <button nbButtonToggle>C</button>
-        <button nbButtonToggle>D</button>
+        <button nbButtonToggle [routerLink]="['note/category']">Mes notes</button>
+        <button nbButtonToggle>Mes Composants</button>
     </nb-button-group>
+
+
+    <!-- <nb-menu [items]="menuList"></nb-menu> -->
 
 </div>

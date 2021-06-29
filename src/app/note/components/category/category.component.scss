@@ -1,0 +1,22 @@
+.categories {
+    display: flex;
+}
+
+.categoryBloc {
+    // display: table-cell;
+    background-color: #42aaff;
+    width: 10rem;
+    height: 10rem;
+    margin: auto;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 1rem;
+}
+
+.categoryBloc p {
+    text-transform: uppercase;
+    text-shadow: 1px black;
+    font-size: 2rem;
+    font-weight: bold;
+    color: ghostwhite;
+}

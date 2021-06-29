@@ -1,18 +1,16 @@
-<nb-card>
+<nb-card status="primary">
 
-    <nb-card-header>Catégories</nb-card-header>
+    <nb-card-header>Catégories des Notes</nb-card-header>
 
-    <nb-card-body>
+    <nb-card-body class="categories">
 
-        <nb-card status="success" *ngFor="let c of categories">
-            <nb-card-header>
-                <!-- <div (click)="navigateToCategory(c)"> -->
-                <div [routerLink]="['../resolved/'+c]">
-                    {{c}}
-                </div>
-            </nb-card-header>
-        </nb-card>
+        <!-- Attention Routerlink = Route relative! -->
+        <a class="categoryBloc" *ngFor="let c of categories" [routerLink]="['../public-notes/' + c]">
+            <p>{{c}}</p>
+        </a>
 
     </nb-card-body>
+
+
 
 </nb-card>

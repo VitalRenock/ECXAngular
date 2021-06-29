@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class UserService {
 
-  currentUser : User = {}
+  currentUser : Observable<User> = new Observable<User>();
 
   // Morceau d'url pointant vers le contro
   private urlController : string = 'User/'
@@ -25,8 +25,10 @@ export class UserService {
   login(email : string, password : string) : Observable<User> {
     
     // Formulaire à envoyé (Passage au format JSON)
-    let form = { email : email, password : password }
-    return this.httpClient.post<User>(environment.urlApi + this.urlController + 'Login', form)
+    let form = { email : email, password : password };
+    this.currentUser = this.httpClient.post<User>(environment.urlApi + this.urlController + 'Login', form);
+    
+    return this.currentUser;
   }
 
   getAll() : Observable<User[]> {

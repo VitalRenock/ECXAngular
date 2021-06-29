@@ -1,0 +1,28 @@
+<nb-card status="primary">
+
+    <nb-card-header>{{note.title}}</nb-card-header>
+    <nb-card-body>
+        Titre: {{note.title}}
+        <br>
+        Catégorie: {{note.category}}
+
+        <!-- Loading Components -->
+        <div class="testCompo" *ngFor="let c of compos">
+            <h6>{{c.title}}</h6>
+            <br>
+            {{c.content}}
+            <br>
+            {{c.short}}
+            <br>
+            {{c.description}}
+            <br>
+            {{c.url}}
+        </div>
+
+    </nb-card-body>
+
+    <nb-card-footer>
+        <button nbButton [routerLink]="['../../public-notes/' + note.category]">Retour</button>
+    </nb-card-footer>
+
+</nb-card>
