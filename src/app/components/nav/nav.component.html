@@ -1,3 +1,5 @@
 <div>
-    <nb-menu [items]="menuList"></nb-menu>
+  <button outline nbButton  [nbContextMenu]="menuList">
+      <nb-icon icon="people"></nb-icon>{{currentUser?.nickname}}
+  </button>
 </div>

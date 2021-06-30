@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NbMenuItem } from '@nebular/theme';
+import { User } from 'src/app/shared/models/user';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-nav',
@@ -9,21 +11,42 @@ import { NbMenuItem } from '@nebular/theme';
 export class NavComponent implements OnInit {
 
   menuList : NbMenuItem[] = []
+  currentUser : User = {}
 
   constructor(
+
+    private userService : UserService
 
     ) { }
 
   ngOnInit(): void {
-    this.menuList = [
-      {
-        title: 'User', icon: 'people', children: [
-          { link: '/user/login', title: 'Connexion', icon:'log-in' },
-          { link: '/user/register', title: 'S\'enregister', icon:'save' },
-          { link: '/user/get-all', title: 'Utilisateurs', icon:'people' },
-        ]
+    
+    this.setMenu();
+
+    this.userService.currentUseSubject.subscribe(
+      (u : User) => {
+        this.currentUser = u;
+        this.setMenu();
       }
-    ]
+    );
+    
+  }
+
+  // Méthode pour définir le Menu Utilisateur en fonction du User dans le service
+  setMenu() {
+
+    if (this.currentUser.nickname) {
+      this.menuList = [
+        { link: '/user/get-all', title: 'Utilisateurs', icon:'people' }
+      ];
+    }
+    else {
+      this.menuList = [
+        { link: '/user/login', title: 'Connexion', icon:'log-in' },
+        { link: '/user/register', title: 'S\'enregister', icon:'save' }
+      ];
+    }
+
   }
 
 }

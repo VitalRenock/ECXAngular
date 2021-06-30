@@ -1,0 +1,39 @@
+<form [formGroup]="createNoteFG" (ngSubmit)="postNewNote()">
+
+    <nb-card>
+
+        <nb-card-header>Login</nb-card-header>
+
+        <nb-card-body>
+            <table>
+                <!-- <colgroup>
+                    <col style="background-color:lightsteelblue">
+                </colgroup> -->
+                <tr>
+                    <th><label for="">Titre: </label></th>
+                    <th><input nbInput type="text" formControlName="titleControl"></th>
+                </tr>
+                <tr>
+                    <th><label for="">Catégories: </label></th>
+                    <th><input nbInput type="text" formControlName="categoryControl"></th>
+                </tr>
+                <tr>
+                    <th><label for="">Public: </label></th>
+                    <th><nb-toggle status="basic" formControlName="isPublicControl">Public</nb-toggle></th>
+                </tr>
+                <tr>
+                    <th><label for="">Parent Id: </label></th>
+                    <th><input nbInput type="number" formControlName="parentNote_IdControl"></th>
+                </tr>
+
+            </table>
+
+        </nb-card-body>
+
+        <nb-card-footer>
+            <button nbButton status="success" (click)="postNewNote()">Envoyer</button>
+        </nb-card-footer>
+
+    </nb-card>
+
+</form>

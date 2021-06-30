@@ -21,24 +21,12 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // souscription à mon user
-    this.userService.currentUser.subscribe(
+    this.userService.currentUseSubject.subscribe(
       (u : User) => {
         this.currentUser = u;
-        console.log(this.currentUser);
       }
     );
-
-    // this.menuList = [
-    //   {
-    //     title: 'User', icon: 'people', children: [
-    //       { link: '/user/login', title: 'Connexion', icon:'log-in' },
-    //       { link: '/user/register', title: 'S\'enregister', icon:'save' },
-    //       { link: '/user/get-all', title: 'Utilisateurs', icon:'people' },
-    //     ]
-    //   }
-    // ]
-
+    
   }
 
 }

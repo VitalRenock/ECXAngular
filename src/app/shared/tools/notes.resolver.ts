@@ -4,7 +4,7 @@ import {
   RouterStateSnapshot,
   ActivatedRouteSnapshot
 } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Note } from '../models/note';
 import { NoteService } from '../services/note.service';
 
@@ -21,7 +21,12 @@ export class NotesResolver implements Resolve<Note[]> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Note[]> {
 
-    let category = route.params['category'];
-    return this.noteService.getPublicNotesByCategory(category);
+    if (route.params['category']) {
+      return this.noteService.getPublicNotesByCategory(route.params['category']);
+    }
+    else {
+      return this.noteService.getAllUserNotes(route.params['userId']);
+    }
+
   }
 }

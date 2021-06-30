@@ -4,7 +4,7 @@ import {
   RouterStateSnapshot,
   ActivatedRouteSnapshot
 } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Note } from '../models/note';
 import { NoteService } from '../services/note.service';
 
@@ -15,14 +15,20 @@ export class NoteResolver implements Resolve<Note> {
 
   constructor(
     
-    private noteService : NoteService
-    
+    private noteService : NoteService,
+    private router : Router
+
   ) { }
 
   // Injection de 'ActivatedRouteSnapshot' dans la méthode resolve
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Note> {
     
     let id = route.params['id'];
+
+    // Si je veux connaitre de quel composant je viens...
+    let previousUrl = ('../../' + this.router.url.split('/')[2]+ '/' + this.router.url.split('/')[3]);
+    sessionStorage.setItem('previousRoute', previousUrl);
+
     return this.noteService.getPublicNote(id);
   }
 }

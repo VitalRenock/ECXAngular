@@ -1,1 +1,24 @@
-<p>user-notes works!</p>
+<nb-card status="info">
+    
+    <nb-card-header>Notes de {{currentUser.nickname}}</nb-card-header>
+    
+    <nb-card-body>
+        
+        <nb-list>
+            <nb-list-item *ngFor="let n of userNotes">
+                {{ n.title }}
+                <button nbButton [routerLink]="['../../display-note/' + n.id]">Voir</button>
+            </nb-list-item>
+        </nb-list>
+    
+    </nb-card-body>
+
+    <nb-card-footer>
+
+        <button nbButton status="success" [routerLink]="['../../create-note']">Créer</button>
+        &#00;&#00;&#00;
+        <button nbButton status="primary" [routerLink]="['../../user-notes' + currentUser.id]">Retour</button>
+        
+    </nb-card-footer>
+
+</nb-card>

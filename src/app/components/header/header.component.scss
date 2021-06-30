@@ -1,0 +1,18 @@
+.homeLinkBloc {
+    display: flex;
+}
+
+.homeLink {
+    margin: auto;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 1rem;
+    font-size: 2rem;
+    font-weight: bold;
+    // text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.homeLink a {
+    text-transform: uppercase;
+    color: ghostwhite;
+}

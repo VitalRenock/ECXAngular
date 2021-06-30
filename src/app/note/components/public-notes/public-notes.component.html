@@ -7,7 +7,7 @@
         <nb-list>
             <nb-list-item *ngFor="let n of notesPublic">
                 {{ n.title }}
-                <button nbButton [routerLink]="['../../public-note/' + n.id]">Voir</button>
+                <button nbButton [routerLink]="['../../display-note/' + n.id]">Voir</button>
             </nb-list-item>
         </nb-list>
     

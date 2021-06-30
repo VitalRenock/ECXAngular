@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Note } from '../models/note';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class NoteService {
 
   constructor(
 
-    private httpClient : HttpClient
+    private httpClient : HttpClient,
+    private userService : UserService
 
   ) { }
 
@@ -47,6 +49,14 @@ export class NoteService {
   getPublicNote(id : number) : Observable<Note> {
 
     return this.httpClient.get<Note>(environment.urlApi + this.urlController + 'GetPublicNote/' + id);
+  }
+
+  postNewNote(newNote : Note) {
+
+    console.log(newNote);
+    console.log()
+
+    return this.httpClient.post(environment.urlApi + this.urlController + 'Create', newNote);
   }
 
 }

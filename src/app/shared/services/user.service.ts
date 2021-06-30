@@ -1,34 +1,48 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { User } from '../models/user';
 import { HttpClient } from '@angular/common/http'
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  currentUser : Observable<User> = new Observable<User>();
-
-  // Morceau d'url pointant vers le contro
+  // Morceau d'url pointant vers le controller
   private urlController : string = 'User/'
 
-
+  // Sauvegarde du User recu lors de la requete de Login
+  private currentUser : User = {}
+  // Event qui va émettre mon User aux composants abonnés
+  currentUseSubject : Subject<User> = new Subject<User>(); 
+  
   constructor(
 
     // Déclaration d'un HttpClient pour communiquer avec l'API
-    private httpClient : HttpClient
+    private httpClient : HttpClient,
+    private router : Router
   ) { }
 
   // Méthode de Login d'un User
-  login(email : string, password : string) : Observable<User> {
-    
+  login(email : string, password : string) {
+  
     // Formulaire à envoyé (Passage au format JSON)
     let form = { email : email, password : password };
-    this.currentUser = this.httpClient.post<User>(environment.urlApi + this.urlController + 'Login', form);
     
-    return this.currentUser;
+    this.httpClient.post<User>(environment.urlApi + this.urlController + 'Login', form).subscribe(
+      (u : User) => {
+        this.currentUser = u;
+        this.emitUser();
+        this.router.navigate(['home']);
+
+      }
+    );
+  }
+
+  emitUser() {
+    this.currentUseSubject.next(this.currentUser);
   }
 
   getAll() : Observable<User[]> {
