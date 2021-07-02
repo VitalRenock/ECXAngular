@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Note } from '../models/note';
-import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +14,12 @@ export class NoteService {
 
   constructor(
 
-    private httpClient : HttpClient,
-    private userService : UserService
+    private httpClient : HttpClient
 
-  ) { }
+    ) { }
+    
 
+  //#region GET Methods
 
   getAllNotes() : Observable<Note[]> {
 
@@ -51,12 +51,47 @@ export class NoteService {
     return this.httpClient.get<Note>(environment.urlApi + this.urlController + 'GetPublicNote/' + id);
   }
 
-  postNewNote(newNote : Note) {
+  //#endregion
 
-    console.log(newNote);
-    console.log()
+  //#region POST Methods
 
-    return this.httpClient.post(environment.urlApi + this.urlController + 'Create', newNote);
+  postNewNote(newNote : Note) : Observable<number> {
+
+    return this.httpClient.post<number>(environment.urlApi + this.urlController + 'Create', newNote);
   }
+
+  //#endregion
+
+  //#region PUT Methods
+
+  updateNote(note : Note) {
+
+    let form = { 
+      id: note.id,
+      title: note.title,
+      category: note.category
+    }
+
+    return this.httpClient.put(environment.urlApi + this.urlController + 'Update', form);
+  }
+
+  setVisibility(noteId : number, isPublic : boolean) {
+
+    let form = { id: noteId, isPublic: isPublic }
+    console.log(form);
+
+    return this.httpClient.put(environment.urlApi + this.urlController + 'SetVisibility', form);
+  }
+
+  //#endregion
+
+  //#region DELETE Methods
+
+  deleteNote(noteId : number) {
+
+    return  this.httpClient.delete(environment.urlApi + this.urlController + 'Delete/' + noteId);
+  }
+
+  //#endregion
 
 }

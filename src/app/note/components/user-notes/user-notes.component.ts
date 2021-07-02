@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Note } from 'src/app/shared/models/note';
 import { User } from 'src/app/shared/models/user';
+import { NoteService } from 'src/app/shared/services/note.service';
 import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
@@ -17,7 +18,8 @@ export class UserNotesComponent implements OnInit {
   constructor(
 
     private activatedRoute : ActivatedRoute,
-    private userService : UserService
+    private userService : UserService,
+    private noteService : NoteService
 
   ) { }
 
@@ -30,7 +32,20 @@ export class UserNotesComponent implements OnInit {
         this.currentUser = u;
       }
     );
+    this.userService.emitUser();
+  }
 
+  deleteNote(id : number) {
+
+    this.noteService.deleteNote(id).subscribe(
+      () => {
+        this.noteService.getAllUserNotes(this.currentUser.id ?? 0).subscribe(
+          (n : Note[]) => {
+            this.userNotes = n;
+          }
+        )
+      }
+    )
   }
 
 }

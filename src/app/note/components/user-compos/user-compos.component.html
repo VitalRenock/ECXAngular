@@ -1,0 +1,38 @@
+<nb-card status="info">
+    
+    <nb-card-header>Composants de <strong><i>{{currentUser.nickname}}</i></strong></nb-card-header>
+    
+    <nb-card-body>
+
+        <table>
+            <tr *ngFor="let c of userCompos">
+                <th>{{ c.title }}</th>
+                <th>
+                    <button nbButton outline status="info" shape="semi-round" size="small" [routerLink]="['../../display-compo/' + c.id]">
+                        <nb-icon icon="eye-outline"></nb-icon>Voir
+                    </button>
+                </th>
+                <th>
+                    <button nbButton outline status="warning" shape="semi-round" size="small" [routerLink]="['../../update-compo/' + c.id]">
+                        <nb-icon icon="edit-outline"></nb-icon>Éditer
+                    </button>
+                </th>
+                <th>
+                    <button nbButton outline status="danger" shape="semi-round" size="small" (click)="deleteCompo(c.id!)">
+                        <nb-icon icon="close-outline"></nb-icon>Supprimer
+                    </button>
+                </th>
+            </tr>
+        </table>
+    
+    </nb-card-body>
+
+    <nb-card-footer>
+
+        <button nbButton outline status="success" shape="semi-round" size="small" [routerLink]="['../../create-compo']">
+            <nb-icon icon="plus-outline"></nb-icon>Créer
+        </button>
+        
+    </nb-card-footer>
+
+</nb-card>

@@ -1,22 +1,24 @@
-.categories {
-    display: flex;
-}
-
-.categoryBloc {
-    // display: table-cell;
+.category {
+    display: inline-block;
     background-color: #42aaff;
     width: 10rem;
     height: 10rem;
-    margin: auto;
+    margin: 1rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    line-height: 10rem;
+    border-radius: 1rem;
+
+    color: ghostwhite;
     text-align: center;
     text-decoration: none;
-    border-radius: 1rem;
-}
-
-.categoryBloc p {
     text-transform: uppercase;
-    text-shadow: 1px black;
     font-size: 2rem;
     font-weight: bold;
-    color: ghostwhite;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.container {
+    text-align: center;
 }

@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 
 import { SharedRoutingModule } from './shared-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NbButtonGroupModule, NbButtonModule, NbCardModule, NbContextMenuDirective, NbContextMenuModule, NbInputModule, NbLayoutModule, NbListModule, NbSelectModule, NbToggleModule } from '@nebular/theme';
+import { NbButtonGroupModule, NbButtonModule, NbCardModule, NbContextMenuDirective, NbContextMenuModule, NbIconModule, NbInputModule, NbLayoutModule, NbListModule, NbSelectModule, NbToggleModule, NbWindowModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { HttpClientModule } from '@angular/common/http';
+import { config } from 'rxjs';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     NbLayoutModule,
     NbEvaIconsModule,
+    NbIconModule,
     HttpClientModule,
     NbCardModule,
     NbInputModule,
@@ -28,7 +30,8 @@ import { HttpClientModule } from '@angular/common/http';
     NbSelectModule,
     NbButtonGroupModule,
     NbContextMenuModule,
-    NbToggleModule
+    NbToggleModule,
+    NbWindowModule.forChild()
   ],
   exports: [
     // Exports des Modules afin de les rendres disponible dans l'application
@@ -36,6 +39,7 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     NbLayoutModule,
     NbEvaIconsModule,
+    NbIconModule,
     HttpClientModule,
     NbCardModule,
     NbInputModule,
@@ -44,7 +48,8 @@ import { HttpClientModule } from '@angular/common/http';
     NbSelectModule,
     NbButtonGroupModule,
     NbContextMenuModule,
-    NbToggleModule
+    NbToggleModule,
+    NbWindowModule 
   ]
 })
 export class SharedModule { }

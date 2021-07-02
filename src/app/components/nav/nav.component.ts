@@ -37,7 +37,7 @@ export class NavComponent implements OnInit {
 
     if (this.currentUser.nickname) {
       this.menuList = [
-        { link: '/user/get-all', title: 'Utilisateurs', icon:'people' }
+        { link: '/user/get-all', title: 'Panneau Admin', icon:'people' }
       ];
     }
     else {

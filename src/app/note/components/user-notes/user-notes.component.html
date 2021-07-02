@@ -1,23 +1,37 @@
 <nb-card status="info">
     
-    <nb-card-header>Notes de {{currentUser.nickname}}</nb-card-header>
+    <nb-card-header>Notes de <strong><i>{{currentUser.nickname}}</i></strong></nb-card-header>
     
     <nb-card-body>
-        
-        <nb-list>
-            <nb-list-item *ngFor="let n of userNotes">
-                {{ n.title }}
-                <button nbButton [routerLink]="['../../display-note/' + n.id]">Voir</button>
-            </nb-list-item>
-        </nb-list>
+
+        <table>
+            <tr *ngFor="let n of userNotes">
+                <th>{{ n.title }}</th>
+                <th>
+                    <button nbButton ghost status="info" shape="semi-round" size="small" [routerLink]="['../../display-note/' + n.id]">
+                        <nb-icon icon="eye-outline"></nb-icon>Voir
+                    </button>
+                </th>
+                <th>
+                    <button nbButton ghost status="warning" shape="semi-round" size="small" [routerLink]="['../../update-note/' + n.id]">
+                        <nb-icon icon="edit-outline"></nb-icon>Éditer
+                    </button>
+                </th>
+                <th>
+                    <button nbButton ghost status="danger" shape="semi-round" size="small" (click)="deleteNote(n.id!)">
+                        <nb-icon icon="close-outline"></nb-icon>Supprimer
+                    </button>
+                </th>
+            </tr>
+        </table>
     
     </nb-card-body>
 
     <nb-card-footer>
 
-        <button nbButton status="success" [routerLink]="['../../create-note']">Créer</button>
-        &#00;&#00;&#00;
-        <button nbButton status="primary" [routerLink]="['../../user-notes' + currentUser.id]">Retour</button>
+        <button nbButton outline status="success" shape="semi-round" size="small" [routerLink]="['../../create-note']">
+            <nb-icon icon="plus-outline"></nb-icon>Créer
+        </button>
         
     </nb-card-footer>
 

@@ -2,12 +2,10 @@
 
     <nb-card-header>Catégories des Notes</nb-card-header>
 
-    <nb-card-body class="categories">
-
+    <nb-card-body class="container" >
+        
         <!-- Attention Routerlink = Route relative! -->
-        <a class="categoryBloc" *ngFor="let c of categories" [routerLink]="['../public-notes/' + c]">
-            <p>{{c}}</p>
-        </a>
+        <a class="category" *ngFor="let c of categories" [routerLink]="['../public-notes/' + c]">{{c}}</a>
 
     </nb-card-body>
 

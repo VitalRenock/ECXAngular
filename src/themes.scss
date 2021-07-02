@@ -15,6 +15,16 @@ $nb-themes: nb-register-theme((
   // color-primary-800: #102694,
   // color-primary-900: #091c7a,
 
-  header-height: 6rem
+  layout-background-color: #7E7F83,
+  
+  header-background-color: #14110F,
+  header-text-color: #D9C5B2, 
+  header-height: 6rem,
+
+  footer-background-color: #14110F,
+  footer-text-color: #D9C5B2,
+
+  card-background-color: #34312D,
+  card-text-color: #F3F3F4
 
 ), corporate, corporate);

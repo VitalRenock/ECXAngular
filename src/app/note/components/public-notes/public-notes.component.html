@@ -3,18 +3,20 @@
     <nb-card-header>Catégorie: {{category}}</nb-card-header>
     
     <nb-card-body>
-        
-        <nb-list>
-            <nb-list-item *ngFor="let n of notesPublic">
-                {{ n.title }}
-                <button nbButton [routerLink]="['../../display-note/' + n.id]">Voir</button>
-            </nb-list-item>
-        </nb-list>
+
+        <table>
+            <tr *ngFor="let n of notesPublic">
+                <th>{{ n.title }}</th>
+                <th>
+                    <button nbButton outline status="info" shape="semi-round" size="small" [routerLink]="['../../display-note/' + n.id]">Voir</button>
+                </th>
+            </tr>
+        </table>
     
     </nb-card-body>
 
-    <nb-card-footer>
-        <button nbButton [routerLink]="['../../category']">Retour</button>
+    <nb-card-footer class="cardFooter">
+        <button nbButton outline  size="small" [routerLink]="['../../category']">Retour</button>
     </nb-card-footer>
 
 </nb-card>

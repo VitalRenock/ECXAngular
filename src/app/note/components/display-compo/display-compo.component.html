@@ -1,0 +1,20 @@
+<nb-card status="primary">
+
+    <nb-card-header>{{compo.title}}</nb-card-header>
+    <nb-card-body>
+        Titre: {{compo.title}}
+        (debug Id): {{compo.id}}
+        <br>
+        Short: {{compo.short}}
+        Content: {{compo.content}}
+        Description: {{compo.description}}
+        Url: <a href={{compo.url}}>{{compo.url}}</a> 
+
+
+    </nb-card-body>
+
+    <nb-card-footer>
+        <button nbButton [routerLink]="[previousRoute]">Retour</button>
+    </nb-card-footer>
+
+</nb-card>

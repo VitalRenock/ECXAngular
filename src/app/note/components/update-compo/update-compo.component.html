@@ -1,0 +1,43 @@
+<form [formGroup]="updateCompoFG">
+
+    <nb-card status="warning">
+        
+        <nb-card-header>Éditer le composant: <i>{{compo.title}}</i></nb-card-header>
+        
+        <nb-card-body>
+            <table>
+                <!-- <colgroup>
+                    <col style="background-color:lightsteelblue">
+                </colgroup> -->
+                <tr>
+                    <th><label for="">Titre: </label></th>
+                    <th><input nbInput type="text" formControlName="titleControl"></th>
+                </tr>
+                <tr>
+                    <th><label for="">Content: </label></th>
+                    <th><input nbInput type="text" formControlName="contentControl"></th>
+                </tr>
+                <tr>
+                    <th><label for="">Short: </label></th>
+                    <th><input nbInput type="text" formControlName="shortControl"></th>
+                </tr>                <tr>
+                    <th><label for="">Description: </label></th>
+                    <th><input nbInput type="text" formControlName="descriptionControl"></th>
+                </tr>                <tr>
+                    <th><label for="">Url: </label></th>
+                    <th><input nbInput type="text" formControlName="urlControl"></th>
+                </tr>
+
+        
+                
+            </table>
+        </nb-card-body>
+        
+        
+        <nb-card-footer>
+            <button nbButton status="success" (click)="updateNote()">Enregistrer</button>
+        </nb-card-footer>
+        
+    </nb-card>
+
+</form>

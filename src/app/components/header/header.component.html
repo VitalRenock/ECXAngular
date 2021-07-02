@@ -1,13 +1,13 @@
 <div class="headerMenu">
 
     <div class="homeLinkBloc">
-        <a class="homeLink" [routerLink]="['home']">ExtraCortex</a>
+        <a class="homeLink" [routerLink]="['home']">DropNote</a>
     </div>
     
     <nb-button-group ghost>
         <button nbButtonToggle [routerLink]="['note/category']">Catégories</button>
         <button nbButtonToggle *ngIf="currentUser.nickname != null" [routerLink]="['note/user-notes/' + currentUser.id]">Mes notes</button>
-        <button nbButtonToggle *ngIf="currentUser.nickname != null">Mes Composants</button>
+        <button nbButtonToggle *ngIf="currentUser.nickname != null" [routerLink]="['note/user-compos/' + currentUser.id]">Mes Composants</button>
     </nb-button-group>
 
 </div>
