@@ -11,7 +11,7 @@ import { UserService } from 'src/app/shared/services/user.service';
 export class HeaderComponent implements OnInit {
 
   menuList : NbMenuItem[] = []
-  currentUser : User = {}
+  currentUser? : User
   
   constructor(
 

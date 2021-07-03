@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { SharedRoutingModule } from './shared-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NbButtonGroupModule, NbButtonModule, NbCardModule, NbContextMenuDirective, NbContextMenuModule, NbIconModule, NbInputModule, NbLayoutModule, NbListModule, NbSelectModule, NbToggleModule, NbWindowModule } from '@nebular/theme';
+import { NbBadgeModule, NbButtonGroupModule, NbButtonModule, NbCardModule, NbContextMenuDirective, NbContextMenuModule, NbIconModule, NbInputModule, NbLayoutModule, NbListModule, NbSelectModule, NbToastrModule, NbToastrService, NbToggleModule, NbWindowModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { HttpClientModule } from '@angular/common/http';
 import { config } from 'rxjs';
@@ -31,7 +31,8 @@ import { config } from 'rxjs';
     NbButtonGroupModule,
     NbContextMenuModule,
     NbToggleModule,
-    NbWindowModule.forChild()
+    NbWindowModule.forChild(),
+    NbBadgeModule
   ],
   exports: [
     // Exports des Modules afin de les rendres disponible dans l'application
@@ -49,7 +50,8 @@ import { config } from 'rxjs';
     NbButtonGroupModule,
     NbContextMenuModule,
     NbToggleModule,
-    NbWindowModule 
+    NbWindowModule,
+    NbBadgeModule
   ]
 })
 export class SharedModule { }

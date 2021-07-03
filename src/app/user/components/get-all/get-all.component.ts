@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Role } from 'src/app/shared/models/role';
 import { User } from 'src/app/shared/models/user';
@@ -15,59 +14,6 @@ export class GetAllComponent implements OnInit {
 
   userList : User[] = [];
   roleList : Role[] = [];
-
-  fakeRoles : Role[] = 
-  [
-    {
-      "id": 1,
-      "name": "Administrateur",
-      "color": "#333333",
-      "description": "Responsable des Utilisateurs et Notes du site."
-    },
-    {
-      "id": 2,
-      "name": "Modérateur",
-      "color": "#666666",
-      "description": "En charge de la modération des Notes du site"
-    },
-    {
-      "id": 3,
-      "name": "Rédacteur",
-      "color": "#999999",
-      "description": "En charge de la rédaction des Notes du site"
-    }
-  ];
-
-  fakeUsers : User[] =
-  [
-    {
-      "id": 1,
-      "email": "renaud@mail.com",
-      "password": undefined,
-      "nickname": "VitalRenock",
-      "lastname": "Brigode",
-      "firstname": "Renaud",
-      "role": "Administrateur"
-    },
-    {
-      "id": 2,
-      "email": "mexojer@mail.com",
-      "password": undefined,
-      "nickname": "Mexojer",
-      "lastname": "Thunus",
-      "firstname": "Jérôme",
-      "role": "Modérateur"
-    },
-    {
-      "id": 3,
-      "email": "momo@mail.com",
-      "password": undefined,
-      "nickname": "Momo",
-      "lastname": "Lechat",
-      "firstname": "Maurice",
-      "role": "Rédacteur"
-    }
-  ];
   
   constructor(
 
@@ -83,7 +29,6 @@ export class GetAllComponent implements OnInit {
     this.userService.getAll().subscribe(
       (users : User[]) => {
         this.userList = users
-        console.log(users)
       }
     );
 
@@ -92,9 +37,6 @@ export class GetAllComponent implements OnInit {
         this.roleList = roles
       }
     );
-
-    // this.roleList = this.fakeRoles;
-    // this.userList = this.fakeUsers;
 
   }
 
@@ -105,8 +47,8 @@ export class GetAllComponent implements OnInit {
 
     roleName = roleSelect?.innerText
 
-
     if (userId != null && userId != 0 && roleName != null) {
+
     }
     if (userId == null) {
       console.log("setRole() => userId ne peut être 'null'");
@@ -131,9 +73,6 @@ export class GetAllComponent implements OnInit {
 
        }
     );
-
-    
-
   }
 
 }

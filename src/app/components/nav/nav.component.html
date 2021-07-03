@@ -1,5 +1,8 @@
 <div>
-  <button outline nbButton  [nbContextMenu]="menuList">
+  <button nbButton outline [nbContextMenu]="menuList">
       <nb-icon icon="people"></nb-icon>{{currentUser?.nickname}}
+  </button>
+  <button nbButton outline *ngIf="currentUser != undefined" (click)="logout()">
+    <nb-icon icon="log-out-outline"></nb-icon>
   </button>
 </div>

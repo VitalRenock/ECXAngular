@@ -11,7 +11,7 @@ import { UserService } from 'src/app/shared/services/user.service';
 export class NavComponent implements OnInit {
 
   menuList : NbMenuItem[] = []
-  currentUser : User = {}
+  currentUser? : User
 
   constructor(
 
@@ -35,7 +35,7 @@ export class NavComponent implements OnInit {
   // Méthode pour définir le Menu Utilisateur en fonction du User dans le service
   setMenu() {
 
-    if (this.currentUser.nickname) {
+    if (this.currentUser != null) {
       this.menuList = [
         { link: '/user/get-all', title: 'Panneau Admin', icon:'people' }
       ];
@@ -47,6 +47,11 @@ export class NavComponent implements OnInit {
       ];
     }
 
+  }
+
+  logout() {
+
+    this.userService.logout();
   }
 
 }

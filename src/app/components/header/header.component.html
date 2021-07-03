@@ -6,8 +6,8 @@
     
     <nb-button-group ghost>
         <button nbButtonToggle [routerLink]="['note/category']">Catégories</button>
-        <button nbButtonToggle *ngIf="currentUser.nickname != null" [routerLink]="['note/user-notes/' + currentUser.id]">Mes notes</button>
-        <button nbButtonToggle *ngIf="currentUser.nickname != null" [routerLink]="['note/user-compos/' + currentUser.id]">Mes Composants</button>
+        <button nbButtonToggle *ngIf="currentUser != null" [routerLink]="['note/user-notes/' + currentUser.id]">Mes notes</button>
+        <button nbButtonToggle *ngIf="currentUser != null" [routerLink]="['note/user-compos/' + currentUser.id]">Mes Composants</button>
     </nb-button-group>
 
 </div>

@@ -1,29 +1,34 @@
-<nb-card status="primary">
+<nb-card status="basic">
 
-    <nb-card-header>{{note.title}}</nb-card-header>
+    <nb-card-header style="position: relative;">
+        <nb-badge text={{note.category}} status="warning" position="top right"></nb-badge>
+        {{note.title}}
+    </nb-card-header>
     <nb-card-body>
-        Titre: {{note.title}}
         (debug Id): {{note.id}}
         <br>
-        Catégorie: {{note.category}}
 
         <!-- Loading Components -->
         <div class="testCompo" *ngFor="let c of compos">
             <h6>{{c.title}}</h6>
             <br>
-            {{c.content}}
+            <strong><i>Code:</i></strong>
+            <div class="codeContent" style="position: relative;">
+                <nb-badge text={{c.short}} status="info" position="top right">Heloo</nb-badge>
+                {{c.content}}
+            </div>
             <br>
-            {{c.short}}
+            <p>
+                {{c.description}}
+            </p>
             <br>
-            {{c.description}}
-            <br>
-            {{c.url}}
+            <a href={{c.url}}>{{c.url}}</a>
         </div>
 
     </nb-card-body>
 
     <nb-card-footer>
-        <button nbButton [routerLink]="[previousRoute]">Retour</button>
+        <button nbButton ghost status="primary" shape="semi-round" size="small" [routerLink]="[previousRoute]">Retour</button>
     </nb-card-footer>
 
 </nb-card>

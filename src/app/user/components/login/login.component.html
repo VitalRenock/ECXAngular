@@ -1,19 +1,33 @@
 <form [formGroup]="loginFG" (ngSubmit)="login()">
 
-    <nb-card>
+    <nb-card status="basic">
 
         <nb-card-header>Login</nb-card-header>
 
         <nb-card-body>
-            <label for="">Email: </label>
-            <input nbInput type="text" formControlName="emailControl">
+            <table>
+                <tr>
+                    <th>
+                        <label for="">Email: </label>
+                    </th>
+                    <th>
+                        <input nbInput type="text" formControlName="emailControl">
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <label for="">Password: </label>
+                    </th>
+                    <th>
+                        <input nbInput type="password" formControlName="passwordControl">
+                    </th>
+                </tr>
+            </table>
             <br>
-            <label for="">Password: </label>
-            <input nbInput type="password" formControlName="passwordControl">
         </nb-card-body>
 
         <nb-card-footer>
-            <button nbButton type="submit">Envoyer</button>
+            <button nbButton ghost status="success" shape="semi-round" size="small" type="submit">Envoyer</button>
         </nb-card-footer>
 
     </nb-card>
