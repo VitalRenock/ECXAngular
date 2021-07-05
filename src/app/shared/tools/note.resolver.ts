@@ -28,7 +28,14 @@ export class NoteResolver implements Resolve<Note> {
     // Si je veux connaitre de quel composant je viens...
     let previousUrl = ('../../' + this.router.url.split('/')[2]+ '/' + this.router.url.split('/')[3]);
     sessionStorage.setItem('previousRoute', previousUrl);
+    console.log(previousUrl);
 
-    return this.noteService.getPublicNote(id);
+    if (this.router.url.split('/')[2] == 'user-notes') {
+      return this.noteService.getNoteById(id);
+    }
+    else {
+      return this.noteService.getPublicNote(id);
+    }
+
   }
 }

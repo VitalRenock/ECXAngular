@@ -1,12 +1,13 @@
-<nb-card status="info">
+<nb-card status="basic">
     
     <nb-card-header>Notes de <strong><i>{{currentUser.nickname}}</i></strong></nb-card-header>
     
     <nb-card-body>
 
         <table>
-            <tr *ngFor="let n of userNotes">
-                <th>{{ n.title }}</th>
+            <tr *ngFor="let n of userNotes" >
+                <th>{{ n.title }}&nbsp;&nbsp;&nbsp;</th>
+                <th>{{n.category}}</th>
                 <th>
                     <button nbButton ghost status="info" shape="semi-round" size="small" [routerLink]="['../../display-note/' + n.id]">
                         <nb-icon icon="eye-outline"></nb-icon>Voir

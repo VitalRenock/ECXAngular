@@ -11,7 +11,8 @@ import { UserService } from 'src/app/shared/services/user.service';
 export class NavComponent implements OnInit {
 
   menuList : NbMenuItem[] = []
-  currentUser? : User
+  // currentUser? : User
+  currentUser : User = {}
 
   constructor(
 
@@ -22,29 +23,39 @@ export class NavComponent implements OnInit {
   ngOnInit(): void {
     
     this.setMenu();
-
+    
     this.userService.currentUseSubject.subscribe(
       (u : User) => {
         this.currentUser = u;
         this.setMenu();
       }
-    );
+      );
+      
+    }
     
-  }
-
   // Méthode pour définir le Menu Utilisateur en fonction du User dans le service
   setMenu() {
 
-    if (this.currentUser != null) {
-      this.menuList = [
-        { link: '/user/get-all', title: 'Panneau Admin', icon:'people' }
-      ];
-    }
-    else {
-      this.menuList = [
-        { link: '/user/login', title: 'Connexion', icon:'log-in' },
-        { link: '/user/register', title: 'S\'enregister', icon:'save' }
-      ];
+    switch (this.currentUser?.role) {
+      case 'Rédacteur':
+        this.menuList = [
+          { link: '/user/profil', title: 'Profil', icon:'people' }
+        ];
+        break;
+
+      case 'Administrateur':
+        this.menuList = [
+          { link: '/user/profil', title: 'Profil', icon:'people' },
+          { link: '/user/get-all', title: 'Panneau Admin', icon:'people' }
+        ];
+        break;
+    
+      default:
+        this.menuList = [
+          { link: '/user/login', title: 'Connexion', icon:'log-in' },
+          { link: '/user/register', title: 'S\'enregister', icon:'save' }
+        ];
+        break;
     }
 
   }

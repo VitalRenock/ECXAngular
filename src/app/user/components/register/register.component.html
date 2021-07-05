@@ -1,1 +1,42 @@
-<p>register works!</p>
+<form [formGroup]="registerFG">
+
+    <nb-card>
+
+        <nb-card-header>S'enregistrer</nb-card-header>
+
+        <nb-card-body>
+
+            <table>
+                <tr>
+                    <th><label for="">Email: </label></th>
+                    <th><input nbInput type="text" formControlName="emailControl"></th>
+                </tr>
+                <tr>
+                    <th><label for="">Password: </label></th>
+                    <th><input nbInput type="password" formControlName="passwordControl"></th>
+                </tr>
+                <tr>
+                    <th><label for="">Pseudo: </label></th>
+                    <th><input nbInput type="text" formControlName="nicknameControl"></th>
+                </tr>
+                <tr>
+                    <th><label for="">Nom: </label></th>
+                    <th><input nbInput type="text" formControlName="lastnameControl"></th>
+                </tr>
+                <tr>
+                    <th><label for="">Prénom: </label></th>
+                    <th><input nbInput type="text" formControlName="firstnameControl"></th>
+                </tr>
+            </table>
+
+        </nb-card-body>
+
+        <nb-card-footer>
+            <button nbButton ghost status="success" shape="semi-round" size="small" (click)="register()" >
+                <nb-icon icon="plus-outline"></nb-icon>Envoyer
+            </button>
+        </nb-card-footer>
+
+    </nb-card>
+
+</form>

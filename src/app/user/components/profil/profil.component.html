@@ -1,0 +1,41 @@
+<nb-card status="basic">
+
+    <nb-card-header>Profil de {{currentUser.nickname}}</nb-card-header>
+
+    <nb-card-body>
+
+
+        <form [formGroup]="updateUserFG">
+            <table>
+                <tr>
+                    <th>Email: </th>
+                    <th>{{currentUser.email}}</th>
+                </tr>
+                <tr>
+                    <th>Rôle: </th>
+                    <th>{{currentUser.role}}</th>
+                </tr>
+                <br>
+                <tr>
+                    <th><label>Pseudo: </label></th>
+                    <th><input nbInput type="text" formControlName="nicknameControl"></th>
+                </tr>
+                <tr>
+                    <th><label>Nom: </label></th>
+                    <th><input nbInput type="text" formControlName="lastnameControl"></th>
+                </tr>
+                <tr>
+                    <th><label>Prénom: </label></th>
+                    <th><input nbInput type="text" formControlName="firstnameControl"></th>
+                </tr>
+            </table>
+        </form>
+    </nb-card-body>
+
+    <nb-card-footer>
+        <button nbButton ghost status="primary" shape="semi-round" size="small" (click)="updateUser()">
+            <nb-icon icon="save-outline"></nb-icon>Enregistrer
+        </button>
+    </nb-card-footer>
+
+</nb-card>

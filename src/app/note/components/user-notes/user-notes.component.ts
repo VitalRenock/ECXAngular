@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Note } from 'src/app/shared/models/note';
 import { User } from 'src/app/shared/models/user';
 import { NoteService } from 'src/app/shared/services/note.service';
@@ -10,10 +11,13 @@ import { UserService } from 'src/app/shared/services/user.service';
   templateUrl: './user-notes.component.html',
   styleUrls: ['./user-notes.component.scss']
 })
-export class UserNotesComponent implements OnInit {
+export class UserNotesComponent implements OnInit, OnDestroy {
 
   userNotes : Note[]= []
   currentUser : User = {}
+  sub : Subscription = new Subscription()
+
+  categories : string[] = []
 
   constructor(
 
@@ -23,16 +27,24 @@ export class UserNotesComponent implements OnInit {
 
   ) { }
 
+
   ngOnInit(): void {
 
     this.userNotes = this.activatedRoute.snapshot.data['notesResolues'];
     
-    this.userService.currentUseSubject.subscribe(
+    this.sub = this.userService.currentUseSubject.subscribe(
       (u : User) => {
         this.currentUser = u;
       }
     );
     this.userService.emitUser();
+
+    this.noteService.getCategories().subscribe(
+      (c : string[]) => { 
+        this.categories = c;
+      }
+    );
+
   }
 
   deleteNote(id : number) {
@@ -46,6 +58,10 @@ export class UserNotesComponent implements OnInit {
         )
       }
     )
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 
 }

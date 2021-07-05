@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Compo } from 'src/app/shared/models/compo';
 import { User } from 'src/app/shared/models/user';
 import { CompoService } from 'src/app/shared/services/compo.service';
@@ -10,10 +11,11 @@ import { UserService } from 'src/app/shared/services/user.service';
   templateUrl: './user-compos.component.html',
   styleUrls: ['./user-compos.component.scss']
 })
-export class UserComposComponent implements OnInit {
+export class UserComposComponent implements OnInit, OnDestroy {
 
   userCompos : Compo[] = []
   currentUser : User = {}
+  sub : Subscription = new Subscription()
 
   constructor(
 
@@ -22,12 +24,15 @@ export class UserComposComponent implements OnInit {
     private compoService: CompoService
 
   ) { }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe()
+  }
 
   ngOnInit(): void {
 
     this.userCompos = this.activatedRoute.snapshot.data['composResolus'];
 
-    this.userService.currentUseSubject.subscribe(
+    this.sub = this.userService.currentUseSubject.subscribe(
       (u : User) => {
         this.currentUser = u;
       }

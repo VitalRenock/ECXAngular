@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { User } from '../models/user';
 import { HttpClient } from '@angular/common/http'
 import { environment } from 'src/environments/environment';
@@ -19,7 +19,7 @@ export class UserService {
   // Sauvegarde du User recu lors de la requete de Login
   private currentUser? : User
   // Event qui va émettre mon User aux composants abonnés
-  currentUseSubject : Subject<User> = new Subject<User>(); 
+  currentUseSubject : Subject<User> = new Subject<User>();
   
   constructor(
 
@@ -39,6 +39,9 @@ export class UserService {
 
   getUserById(userId : number) : Observable<User> {
 
+    console.log('getUserById');
+    console.log(userId);
+
     return this.httpClient.get<User>(environment.urlApi + this.urlController + 'GetUserById/' + userId);
   }
 
@@ -46,7 +49,6 @@ export class UserService {
 
   //#region POST Methods
 
-  // Méthode de Login d'un User
   login(email : string, password : string) {
   
     // Formulaire à envoyé (Passage au format JSON)
@@ -67,11 +69,63 @@ export class UserService {
       }
     );
   }
+
+  register(user : User) {
+    let form = {
+      email: user.email,
+      password: user.password,
+      nickname: user.nickname,
+      lastname: user.lastname,
+      firstname: user.firstname,
+      role: user.role
+    }
+
+    this.httpClient.post(environment.urlApi + this.urlController + 'Register', form).subscribe(
+      () => {
+        // Création d'un Toaster
+        this.toaster.success('', 'Enregistrement réussie', { position: NbGlobalLogicalPosition.BOTTOM_END });
+        // Redirection vers la page d'accueil après la connexion
+        this.router.navigate(['user/login']);
+      }
+    );
+
+  } 
   
   //#endregion
   
   //#region PUT Methods
   
+  updateUser(user : User) {
+
+    let form = {
+      id: user.id,
+      nickname: user.nickname,
+      lastname: user.lastname,
+      firstname: user.firstname
+    }
+    console.log(form);
+
+    this.httpClient.put(environment.urlApi + this.urlController + 'Update', form).subscribe(
+      () => {
+        this.emitUser();
+        this.router.navigate(['home']);
+      }
+    );
+
+    // this.httpClient.put(environment.urlApi + this.urlController + 'Update', form).subscribe(
+    //   () => {
+    //     this.getUserById(user.id!).subscribe(
+    //       (u :User) => { 
+    //         // console.log(u);
+    //         // this.currentUser = u;
+    //         // this.emitUser();
+    //       }
+    //     )
+    //   }
+    // );
+
+  }
+
   setRole(userId : number, roleName : string) {
     
     // Formulaire à envoyé (Passage au format JSON)
@@ -116,6 +170,17 @@ export class UserService {
     else {
       this.currentUseSubject.next(this.currentUser);
     }
+
+  }
+
+  // Test
+  subscribeToUser(sub : Subscription, func : any) : Subscription {
+
+    sub = this.currentUseSubject.subscribe(
+      func()
+    );
+    this.emitUser();
+    return sub;
   }
 
   //#endregion

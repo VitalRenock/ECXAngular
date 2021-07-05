@@ -51,6 +51,11 @@ export class NoteService {
     return this.httpClient.get<Note>(environment.urlApi + this.urlController + 'GetPublicNote/' + id);
   }
 
+  getNoteById(id : number) : Observable<Note> {
+
+    return this.httpClient.get<Note>(environment.urlApi + this.urlController + 'GetNoteById/' + id);
+  }
+
   //#endregion
 
   //#region POST Methods
