@@ -57,17 +57,17 @@ export class CompoService {
 
 createCompo(newCompo : Compo) : Observable<number> {
 
-  let form = {
-    title: newCompo.title,
-    content: newCompo.content,
-    short: newCompo.short,
-    description: newCompo.description,
-    url: newCompo.url,
-    isPublic: newCompo.isPublic,
-    user_Id: newCompo.user_Id
-  }
+  // let form = {
+  //   title: newCompo.title,
+  //   content: newCompo.content,
+  //   short: newCompo.short,
+  //   description: newCompo.description,
+  //   url: newCompo.url,
+  //   isPublic: newCompo.isPublic,
+  //   user_Id: newCompo.user_Id
+  // }
 
-  return this.httpClient.post<number>(environment.urlApi + this.urlController + 'Create', form);
+  return this.httpClient.post<number>(environment.urlApi + this.urlController + 'Create', newCompo);
 }
 
 addCompoToNote(noteId : number, compoId : number) : Observable<number> {
@@ -86,16 +86,16 @@ addCompoToNote(noteId : number, compoId : number) : Observable<number> {
 
 updateCompo(compo : Compo) {
 
-  let form = {
-    id: compo.id,
-    title: compo.title,
-    content: compo.content,
-    short: compo.short,
-    description: compo.description,
-    url: compo.url
-  }
+  // let form = {
+  //   id: compo.id,
+  //   title: compo.title,
+  //   content: compo.content,
+  //   short: compo.short,
+  //   description: compo.description,
+  //   url: compo.url
+  // }
 
-  return this.httpClient.put(environment.urlApi + this.urlController + 'Update', form);
+  return this.httpClient.put(environment.urlApi + this.urlController + 'Update', compo);
 }
 
 setVisibility(id : number, isPublic : boolean) {
@@ -125,8 +125,8 @@ getFormNewCompo() : FormGroup {
   return this.formBuilder.group(
     {
       titleCompoControl: [null, Validators.required],
+      typeCompoControl: [null, Validators.required],
       contentControl: [null, Validators.required],
-      shortControl: [null, Validators.required],
       descriptionControl: [null, Validators.required],
       urlControl: [null, Validators.required],
       isPublicControl: [null, Validators.required]
@@ -138,8 +138,8 @@ bindFormNewCompo(createCompoFG : FormGroup) : Compo {
   let newCompo : Compo = {};
 
   newCompo.title = createCompoFG.value['titleCompoControl'];
+  newCompo.type = createCompoFG.value['typeCompoControl'];
   newCompo.content = createCompoFG.value['contentControl'];
-  newCompo.short = createCompoFG.value['shortControl'];
   newCompo.description = createCompoFG.value['descriptionControl'];
   newCompo.url = createCompoFG.value['urlControl'];
   newCompo.isPublic = createCompoFG.value['isPublicControl'];

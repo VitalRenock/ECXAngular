@@ -21,8 +21,8 @@ export class NotesResolver implements Resolve<Note[]> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Note[]> {
 
-    if (route.params['category']) {
-      return this.noteService.getPublicNotesByCategory(route.params['category']);
+    if (route.params['categoryId']) {
+      return this.noteService.getPublicNotesByCategory(route.params['categoryId']);
     }
     else {
       return this.noteService.getAllUserNotes(route.params['userId']);

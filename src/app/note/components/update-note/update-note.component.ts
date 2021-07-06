@@ -32,8 +32,7 @@ export class UpdateNoteComponent implements OnInit {
     this.note = this.activatedRoute.snapshot.data['noteResolue'];
 
     this.updateNoteFG = this.formBuilder.group({
-      titleControl: [this.note.title, Validators.required],
-      categoryControl: [this.note.category, Validators.required]
+      titleControl: [this.note.title, Validators.required]
     });
 
     this.userService.currentUseSubject.subscribe(
@@ -48,7 +47,10 @@ export class UpdateNoteComponent implements OnInit {
   updateNote() {
 
     this.note.title = this.updateNoteFG.value['titleControl'];
-    this.note.category = this.updateNoteFG.value['categoryControl'];
+
+    // TO DO: Ajouter Logique des Catégories
+    this.note.category_Id = 1;
+
     this.noteService.updateNote(this.note).subscribe(
       () => {
         this.router.navigate(['note/user-notes/' + this.currentUser.id]);

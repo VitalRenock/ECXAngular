@@ -39,7 +39,6 @@ export class CreateNoteComponent implements OnInit {
     this.createNoteFG = this.formBuilder.group(
       {
         titleControl: [null, Validators.required],
-        categoryControl: [null, Validators.required],
         isPublicControl: [null, Validators.required],
         parentNote_IdControl: [null, Validators.required],
 
@@ -60,10 +59,12 @@ export class CreateNoteComponent implements OnInit {
       
       // Binding du formulaire Note
       this.newNote.title = this.createNoteFG.value['titleControl'];
-      this.newNote.category = this.createNoteFG.value['categoryControl'];
       this.newNote.isPublic = this.createNoteFG.value['isPublicControl'];
       this.newNote.parentNote_Id = this.createNoteFG.value['parentNote_IdControl'];
       this.newNote.user_Id = this.currentUser.id;
+
+      // TO DO: Ajouter Logique des Catégories
+      this.newNote.category_Id = 1;
 
       // Envois de la requête POST
       this.noteService.postNewNote(this.newNote).subscribe(
@@ -79,6 +80,9 @@ export class CreateNoteComponent implements OnInit {
             let newComponent : Compo = {};
             newComponent = this.compoService.bindFormNewCompo(this.getItems().at(i) as FormGroup);
             newComponent.user_Id = this.currentUser.id;
+
+            // TO DO: Ajouter Logique des Catégories
+            newComponent.category_Id = 1;
 
             // On crée chaque composant et on réceptionne l'id
             this.compoService.createCompo(newComponent).subscribe(

@@ -41,15 +41,15 @@ export class NoteService {
     return this.httpClient.get<string[]>(environment.urlApi + this.urlController + 'GetCategories');
   }
   
-  getPublicNotesByCategory(category : string) : Observable<Note[]> {
+  getPublicNotesByCategory(category_id : number) : Observable<Note[]> {
     
-    return this.httpClient.get<Note[]>(environment.urlApi + this.urlController + 'GetPublicNotesByCategory/' + category);
+    return this.httpClient.get<Note[]>(environment.urlApi + this.urlController + 'GetPublicNotesByCategory/' + category_id);
   }
 
-  getPublicNote(id : number) : Observable<Note> {
+  // getPublicNote(id : number) : Observable<Note> {
 
-    return this.httpClient.get<Note>(environment.urlApi + this.urlController + 'GetPublicNote/' + id);
-  }
+  //   return this.httpClient.get<Note>(environment.urlApi + this.urlController + 'GetPublicNote/' + id);
+  // }
 
   getNoteById(id : number) : Observable<Note> {
 
@@ -71,13 +71,13 @@ export class NoteService {
 
   updateNote(note : Note) {
 
-    let form = { 
-      id: note.id,
-      title: note.title,
-      category: note.category
-    }
+    // let form = { 
+    //   id: note.id,
+    //   title: note.title,
+    //   category: note.category
+    // }
 
-    return this.httpClient.put(environment.urlApi + this.urlController + 'Update', form);
+    return this.httpClient.put(environment.urlApi + this.urlController + 'Update', note);
   }
 
   setVisibility(noteId : number, isPublic : boolean) {

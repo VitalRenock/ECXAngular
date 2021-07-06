@@ -25,7 +25,7 @@ const routes: Routes = [
     { path: "create-note", component : CreateNoteComponent },
     { path: "display-note/:id", resolve: { noteResolue : NoteResolver }, component: DisplayNoteComponent },
     { path: "update-note/:id", resolve: { noteResolue : NoteResolver }, component: UpdateNoteComponent },
-    { path: "public-notes/:category", resolve: { notesResolues : NotesResolver }, component: PublicNotesComponent },
+    { path: "public-notes/:categoryId", resolve: { notesResolues : NotesResolver }, component: PublicNotesComponent },
     { path: "user-notes/:userId", resolve:{ notesResolues : NotesResolver }, component: UserNotesComponent },
     
     // Compo Routing

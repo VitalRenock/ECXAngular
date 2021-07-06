@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NoteService } from 'src/app/shared/services/note.service';
+import { Category } from 'src/app/shared/models/category';
+import { CategoryService } from 'src/app/shared/services/category.service';
 
 @Component({
   selector: 'app-category',
@@ -9,19 +10,19 @@ import { NoteService } from 'src/app/shared/services/note.service';
 })
 export class CategoryComponent implements OnInit {
 
-  categories : string[] = []
+  categories : Category[] = []
 
   constructor(
 
-    private noteService : NoteService,
+    private categoryService : CategoryService,
     private router : Router
 
   ) { }
 
   ngOnInit(): void {
 
-    this.noteService.getCategories().subscribe(
-      (c : string[]) => { 
+    this.categoryService.getAllCategories().subscribe(
+      (c : Category[]) => { 
         this.categories = c;
       }
     );

@@ -7,7 +7,7 @@
         <table>
             <tr *ngFor="let n of userNotes" >
                 <th>{{ n.title }}&nbsp;&nbsp;&nbsp;</th>
-                <th>{{n.category}}</th>
+                <th>CategorieId:{{n.category_Id}}</th>
                 <th>
                     <button nbButton ghost status="info" shape="semi-round" size="small" [routerLink]="['../../display-note/' + n.id]">
                         <nb-icon icon="eye-outline"></nb-icon>Voir

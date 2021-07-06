@@ -5,7 +5,7 @@
     <nb-card-body class="container" >
         
         <!-- Attention Routerlink = Route relative! -->
-        <a class="category" *ngFor="let c of categories" [routerLink]="['../public-notes/' + c]">{{c}}</a>
+        <a class="category" *ngFor="let c of categories" [routerLink]="['../public-notes/' + c.id]">{{c.name}}</a>
 
     </nb-card-body>
 

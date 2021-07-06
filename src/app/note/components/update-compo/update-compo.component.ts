@@ -33,8 +33,8 @@ export class UpdateCompoComponent implements OnInit {
 
     this.updateCompoFG = this.formBuilder.group({
       titleControl: [this.compo.title, Validators.required],
+      typeControl: [this.compo.type, Validators.required],
       contentControl: [this.compo.content, Validators.required],
-      shortControl: [this.compo.short, Validators.required],
       descriptionControl: [this.compo.description, Validators.required],
       urlControl: [this.compo.url, Validators.required]
     });
@@ -51,10 +51,14 @@ export class UpdateCompoComponent implements OnInit {
   updateNote() {
 
     this.compo.title = this.updateCompoFG.value['titleControl'];
+    this.compo.type = this.updateCompoFG.value['typeControl'];
     this.compo.content = this.updateCompoFG.value['contentControl'];
-    this.compo.short = this.updateCompoFG.value['shortControl'];
     this.compo.description = this.updateCompoFG.value['descriptionControl'];
     this.compo.url = this.updateCompoFG.value['urlControl'];
+
+    // TO DO: Ajouter Logique des Catégories
+    this.compo.category_Id = 1;
+
     this.compoService.updateCompo(this.compo).subscribe(
       () => {
         this.router.navigate(['note/user-compos/' + this.currentUser.id]);

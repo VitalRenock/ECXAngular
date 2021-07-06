@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Category } from 'src/app/shared/models/category';
 import { Note } from 'src/app/shared/models/note';
+import { CategoryService } from 'src/app/shared/services/category.service';
 
 @Component({
   selector: 'app-public-notes',
@@ -10,18 +12,24 @@ import { Note } from 'src/app/shared/models/note';
 export class PublicNotesComponent implements OnInit {
 
   notesPublic : Note[] = []
-  category : string = ""
+  category : Category = {}
 
   constructor(
 
-    private activatedRoute : ActivatedRoute
+    private activatedRoute : ActivatedRoute,
+    private categoryService : CategoryService
     
   ) { }
 
   ngOnInit(): void {
 
     this.notesPublic = this.activatedRoute.snapshot.data['notesResolues'];
-    this.category = this.activatedRoute.snapshot.params['category'];
+
+    this.categoryService.getCategoryById(this.activatedRoute.snapshot.params['categoryId']).subscribe(
+      (c : Category) => {
+        this.category = c;
+      }
+    )
 
   }
 

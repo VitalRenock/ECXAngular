@@ -34,7 +34,7 @@ export class NoteResolver implements Resolve<Note> {
       return this.noteService.getNoteById(id);
     }
     else {
-      return this.noteService.getPublicNote(id);
+      return this.noteService.getNoteById(id);
     }
 
   }

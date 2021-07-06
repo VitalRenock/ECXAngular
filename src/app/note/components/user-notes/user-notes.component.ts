@@ -17,7 +17,7 @@ export class UserNotesComponent implements OnInit, OnDestroy {
   currentUser : User = {}
   sub : Subscription = new Subscription()
 
-  categories : string[] = []
+  categories : string[] = ["CSharp", "Javascript", "HTML"]
 
   constructor(
 
@@ -39,11 +39,12 @@ export class UserNotesComponent implements OnInit, OnDestroy {
     );
     this.userService.emitUser();
 
-    this.noteService.getCategories().subscribe(
-      (c : string[]) => { 
-        this.categories = c;
-      }
-    );
+    // TO DO Ajouter Logique des Categories
+    // this.noteService.getCategories().subscribe(
+    //   (c : string[]) => { 
+    //     this.categories = c;
+    //   }
+    // );
 
   }
 

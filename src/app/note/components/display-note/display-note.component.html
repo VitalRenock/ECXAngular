@@ -1,7 +1,7 @@
 <nb-card status="basic">
 
     <nb-card-header style="position: relative;">
-        <nb-badge text={{note.category}} status="warning" position="top right"></nb-badge>
+        <nb-badge text={{note.category_Id}} status="warning" position="top right"></nb-badge>
         {{note.title}}
     </nb-card-header>
     <nb-card-body>
@@ -14,7 +14,7 @@
             <br>
             <strong><i>Code:</i></strong>
             <div class="codeContent" style="position: relative;">
-                <nb-badge text={{c.short}} status="info" position="top right">Heloo</nb-badge>
+                <nb-badge text={{c.category_Id}} status="info" position="top right">Heloo</nb-badge>
                 {{c.content}}
             </div>
             <br>

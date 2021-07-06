@@ -49,6 +49,9 @@ export class CreateCompoComponent implements OnInit {
     this.newCompo = this.compoService.bindFormNewCompo(this.createCompoFG);
     this.newCompo.user_Id = this.currentUser.id;
 
+    // TO DO: Ajouter Logique Categorie
+    this.newCompo.category_Id = 1;
+
     // Envois de la requête POST
     this.compoService.createCompo(this.newCompo).subscribe(
       () => {
