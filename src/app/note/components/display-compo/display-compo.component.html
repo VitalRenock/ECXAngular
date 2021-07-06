@@ -2,8 +2,6 @@
 
     <nb-card-header>{{compo.title}}</nb-card-header>
     <nb-card-body>
-        (debug Id): {{compo.id}}
-        <br>
         Type: {{compo.type}}
         <br>
         <div class="codeContent">
@@ -13,12 +11,11 @@
         Description: {{compo.description}}
         <br>
         Url: <a href={{compo.url}}>{{compo.url}}</a> 
-
-
     </nb-card-body>
 
     <nb-card-footer>
         <button nbButton ghost status="primary" shape="semi-round" size="small" [routerLink]="[previousRoute]">Retour</button>
+        Créateur: {{creator.nickname}}
     </nb-card-footer>
 
 </nb-card>

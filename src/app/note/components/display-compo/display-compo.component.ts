@@ -13,6 +13,7 @@ import { UserService } from 'src/app/shared/services/user.service';
 export class DisplayCompoComponent implements OnInit {
 
   compo : Compo = {}
+  creator : User = {}
   previousRoute : string = ''
   currentUser : User = {}
 
@@ -28,8 +29,18 @@ export class DisplayCompoComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.compo = this.activatedroute.snapshot.data['compoResolus'];
+    // Gestion de l'url précédente
     this.previousRoute = sessionStorage.getItem('previousRoute') ?? 'Error';
+
+    // On récupere le composant par le resolver
+    this.compo = this.activatedroute.snapshot.data['compoResolus'];
+
+    // On va rechercher le créateur du composant
+    this.userService.getUserById(this.compo.user_Id!).subscribe(
+      (u : User) => {
+        this.creator = u;
+      }
+    );
 
     // Je vais rechercher mon Utilisateur
     this.userService.currentUseSubject.subscribe(

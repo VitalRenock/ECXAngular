@@ -29,17 +29,20 @@ export class UpdateCompoComponent implements OnInit {
 
   ngOnInit(): void {
 
+    // On récupère le composant
     this.compo = this.activatedRoute.snapshot.data['compoResolus'];
 
+    // Création du formulaire
     this.updateCompoFG = this.formBuilder.group({
       titleControl: [this.compo.title, Validators.required],
       typeControl: [this.compo.type, Validators.required],
       contentControl: [this.compo.content, Validators.required],
       descriptionControl: [this.compo.description, Validators.required],
-      urlControl: [this.compo.url, Validators.required]
+      urlControl: [this.compo.url, Validators.required],
+      isPublicControl: [this.compo.isPublic, Validators.required]
     });
 
-    // Je vais rechercher l'Utilisateur
+    // On va rechercher l'utilisateur courant
     this.userService.currentUseSubject.subscribe(
       (u : User) => {
         this.currentUser = u;
@@ -59,11 +62,16 @@ export class UpdateCompoComponent implements OnInit {
     // TO DO: Ajouter Logique des Catégories
     this.compo.category_Id = 1;
 
+    this.compoService.setVisibility(this.compo.id!, this.updateCompoFG.value['isPublicControl']).subscribe(
+      () => {}
+    );
+
     this.compoService.updateCompo(this.compo).subscribe(
       () => {
         this.router.navigate(['note/user-compos/' + this.currentUser.id]);
       }
-    )
+    );
+
   }
 
 }

@@ -1,10 +1,13 @@
-.testCompo {
-    background-color: #e4e4e42d;
+.displayCompo {
+    background-color: #ffffff;
     width: auto;
     height: auto;
     margin: 1rem;
     padding: 1rem;
-    box-shadow: 10px 5px 5px lightgray;
+    line-height: 0rem;
+    // border-radius: 0.3rem;
+    border-left: medium solid;
+    // box-shadow: 2px 2px 2px lightgray;
 }
 
 .pastille {
@@ -13,9 +16,8 @@
     position: relative;
     top: 2%;
     left: 97%;
-    width: 4rem;
-    height: 4rem;
-    border-radius: 2rem;
+    height: 1rem;
+    border-radius: 0.2rem;
 
     color: ghostwhite;
     font-weight: bold;

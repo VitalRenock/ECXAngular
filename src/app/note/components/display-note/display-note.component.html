@@ -5,26 +5,39 @@
         {{note.title}}
     </nb-card-header>
     <nb-card-body>
-        (debug Id): {{note.id}}
-        <br>
 
+        
         <!-- Loading Components -->
-        <div class="testCompo" *ngFor="let c of compos">
-            <h6>{{c.title}}</h6>
-            <br>
-            <strong><i>Code:</i></strong>
-            <div class="codeContent" style="position: relative;">
-                <nb-badge text={{c.category_Id}} status="info" position="top right">Heloo</nb-badge>
-                {{c.content}}
+        <div *ngFor="let c of compos, let i = index">
+            <div class="displayCompo" [style.border-color]="composCategory[i].color">
+                <div class="pastille"><p>{{composCategory[i].name! ?? 'X'}}</p></div>
+                <!-- <nb-badge text={{c.category_Id}} status="info" position="top right"></nb-badge> -->
+                <h6>{{c.title}}</h6>
+                {{composCategory[i].name}}
+                <div *ngIf="c.content != ''">
+                    <strong><i>Code:</i></strong>
+                    <div class="codeContent" style="position: relative;">
+                        
+                        {{c.content}}
+                    </div>
+                </div>
+                <br>
+                <p>
+                    {{c.description}}
+                </p>
+                <br>
+                <p *ngIf="c.url != ''">
+                    <a href={{c.url}}>{{c.url}}</a>
+                </p>
+                <br>
+                <p>
+                    Créateur: {{composCreators[i]}}
+                </p>
             </div>
-            <br>
-            <p>
-                {{c.description}}
-            </p>
-            <br>
-            <a href={{c.url}}>{{c.url}}</a>
-        </div>
 
+        </div>
+        
+        Créateur: {{creator.nickname}}
     </nb-card-body>
 
     <nb-card-footer>

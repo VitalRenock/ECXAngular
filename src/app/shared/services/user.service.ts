@@ -38,10 +38,7 @@ export class UserService {
   }
 
   getUserById(userId : number) : Observable<User> {
-
-    console.log('getUserById');
-    console.log(userId);
-
+    
     return this.httpClient.get<User>(environment.urlApi + this.urlController + 'GetUserById/' + userId);
   }
 
@@ -103,7 +100,6 @@ export class UserService {
       lastname: user.lastname,
       firstname: user.firstname
     }
-    console.log(form);
 
     this.httpClient.put(environment.urlApi + this.urlController + 'Update', form).subscribe(
       () => {

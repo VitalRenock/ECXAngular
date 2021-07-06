@@ -29,12 +29,16 @@ export class UpdateNoteComponent implements OnInit {
 
   ngOnInit(): void {
 
+    // On recois la note
     this.note = this.activatedRoute.snapshot.data['noteResolue'];
 
+    // Création du formulaire
     this.updateNoteFG = this.formBuilder.group({
-      titleControl: [this.note.title, Validators.required]
+      titleControl: [this.note.title, Validators.required],
+      isPublicControl: [this.note.isPublic, Validators.required],
     });
 
+    // Soucription à l'utilisateur courant
     this.userService.currentUseSubject.subscribe(
       (u : User) => {
         this.currentUser = u;
@@ -51,11 +55,16 @@ export class UpdateNoteComponent implements OnInit {
     // TO DO: Ajouter Logique des Catégories
     this.note.category_Id = 1;
 
+    this.noteService.setVisibility(this.note.id!, this.updateNoteFG.value['isPublicControl']).subscribe(
+      () => {}
+    );
+
     this.noteService.updateNote(this.note).subscribe(
       () => {
         this.router.navigate(['note/user-notes/' + this.currentUser.id]);
       }
-    )
+    );
+
   }
 
 }

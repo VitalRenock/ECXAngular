@@ -86,16 +86,17 @@ addCompoToNote(noteId : number, compoId : number) : Observable<number> {
 
 updateCompo(compo : Compo) {
 
-  // let form = {
-  //   id: compo.id,
-  //   title: compo.title,
-  //   content: compo.content,
-  //   short: compo.short,
-  //   description: compo.description,
-  //   url: compo.url
-  // }
+  let form = {
+    id: compo.id,
+    title: compo.title,
+    type: compo.type,
+    content: compo.content,
+    description: compo.description,
+    url: compo.url,
+    category_Id: compo.category_Id
+  }
 
-  return this.httpClient.put(environment.urlApi + this.urlController + 'Update', compo);
+  return this.httpClient.put(environment.urlApi + this.urlController + 'Update', form);
 }
 
 setVisibility(id : number, isPublic : boolean) {
@@ -105,7 +106,7 @@ setVisibility(id : number, isPublic : boolean) {
     isPublic: isPublic
   }
   
-  return this.httpClient.put(environment.urlApi + this.urlController + 'Update', form);
+  return this.httpClient.put(environment.urlApi + this.urlController + 'SetVisibility', form);
 }
 
 //#endregion

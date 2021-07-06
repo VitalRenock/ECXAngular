@@ -71,19 +71,12 @@ export class NoteService {
 
   updateNote(note : Note) {
 
-    // let form = { 
-    //   id: note.id,
-    //   title: note.title,
-    //   category: note.category
-    // }
-
     return this.httpClient.put(environment.urlApi + this.urlController + 'Update', note);
   }
 
   setVisibility(noteId : number, isPublic : boolean) {
 
     let form = { id: noteId, isPublic: isPublic }
-    console.log(form);
 
     return this.httpClient.put(environment.urlApi + this.urlController + 'SetVisibility', form);
   }
@@ -94,7 +87,7 @@ export class NoteService {
 
   deleteNote(noteId : number) {
 
-    return  this.httpClient.delete(environment.urlApi + this.urlController + 'Delete/' + noteId);
+    return this.httpClient.delete(environment.urlApi + this.urlController + 'Delete/' + noteId);
   }
 
   //#endregion

@@ -1,8 +1,8 @@
 <form [formGroup]="updateCompoFG">
 
-    <nb-card status="warning">
+    <nb-card status="basic">
         
-        <nb-card-header>Éditer le composant: <i>{{compo.title}}</i></nb-card-header>
+        <nb-card-header>Éditer: <i>{{compo.title}}</i></nb-card-header>
         
         <nb-card-body>
 
@@ -30,13 +30,18 @@
                     <th><label for="">Url: </label></th>
                     <th><input nbInput type="text" formControlName="urlControl"></th>
                 </tr>
-                
+                <tr>
+                    <th><label for="">Public: </label></th>
+                    <th><nb-toggle status="basic" formControlName="isPublicControl"></nb-toggle></th>
+                </tr>
             </table>
         </nb-card-body>
         
         
         <nb-card-footer>
-            <button nbButton status="success" (click)="updateNote()">Enregistrer</button>
+            <button nbButton ghost status="success" shape="semi-round" size="small" (click)="updateNote()">
+                <nb-icon icon="save-outline"></nb-icon>Enregistrer
+            </button>
         </nb-card-footer>
         
     </nb-card>

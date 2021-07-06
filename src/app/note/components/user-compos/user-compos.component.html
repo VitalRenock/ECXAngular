@@ -6,7 +6,8 @@
 
         <table>
             <tr *ngFor="let c of userCompos">
-                <th>{{ c.title }}</th>
+                <th>{{ c.title }}&nbsp;&nbsp;&nbsp;</th>
+                <th>{{ getCategoryName(c.category_Id!) }}</th>
                 <th>
                     <button nbButton ghost status="info" shape="semi-round" size="small" [routerLink]="['../../display-compo/' + c.id]">
                         <nb-icon icon="eye-outline"></nb-icon>Voir

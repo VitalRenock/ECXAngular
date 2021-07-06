@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Category } from 'src/app/shared/models/category';
 import { Note } from 'src/app/shared/models/note';
 import { User } from 'src/app/shared/models/user';
+import { CategoryService } from 'src/app/shared/services/category.service';
 import { NoteService } from 'src/app/shared/services/note.service';
 import { UserService } from 'src/app/shared/services/user.service';
 
@@ -16,14 +18,15 @@ export class UserNotesComponent implements OnInit, OnDestroy {
   userNotes : Note[]= []
   currentUser : User = {}
   sub : Subscription = new Subscription()
+  categories : Category[] = []
 
-  categories : string[] = ["CSharp", "Javascript", "HTML"]
 
   constructor(
 
     private activatedRoute : ActivatedRoute,
     private userService : UserService,
-    private noteService : NoteService
+    private noteService : NoteService,
+    private categoryService : CategoryService
 
   ) { }
 
@@ -39,12 +42,12 @@ export class UserNotesComponent implements OnInit, OnDestroy {
     );
     this.userService.emitUser();
 
-    // TO DO Ajouter Logique des Categories
-    // this.noteService.getCategories().subscribe(
-    //   (c : string[]) => { 
-    //     this.categories = c;
-    //   }
-    // );
+    // On va rechercher toutes les Categories
+    this.categoryService.getAllCategories().subscribe(
+      (c : Category[]) => { 
+        this.categories = c;
+      }
+    );
 
   }
 
@@ -59,6 +62,11 @@ export class UserNotesComponent implements OnInit, OnDestroy {
         )
       }
     )
+  }
+
+  getCategoryName(category_Id : number) : string {
+
+    return this.categories.find(c => c.id == category_Id)?.name!
   }
 
   ngOnDestroy(): void {
