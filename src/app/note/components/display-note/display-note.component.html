@@ -10,10 +10,11 @@
         <!-- Loading Components -->
         <div *ngFor="let c of compos, let i = index">
             <div class="displayCompo" [style.border-color]="composCategory[i].color">
-                <div class="pastille"><p>{{composCategory[i].name! ?? 'X'}}</p></div>
-                <!-- <nb-badge text={{c.category_Id}} status="info" position="top right"></nb-badge> -->
+                <!-- Affichage de la catégorie -->
+                <nb-tag-list>
+                    <nb-tag status="info" appearance="outline" size="tiny" text="{{composCategory[i].short!}}"></nb-tag>
+                </nb-tag-list>
                 <h6>{{c.title}}</h6>
-                {{composCategory[i].name}}
                 <div *ngIf="c.content != ''">
                     <strong><i>Code:</i></strong>
                     <div class="codeContent" style="position: relative;">
