@@ -66,7 +66,7 @@ export class UserNotesComponent implements OnInit, OnDestroy {
 
   getCategoryName(category_Id : number) : string {
 
-    return this.categories.find(c => c.id == category_Id)?.name!
+    return this.categories.find(c => c.id == category_Id)?.short!
   }
 
   ngOnDestroy(): void {

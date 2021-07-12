@@ -1,6 +1,7 @@
 <nb-card status="basic">
     
-    <nb-card-header>Catégorie: {{category.name}}</nb-card-header>
+    <!-- WHATTT ???? -->
+    <nb-card-header style="background-color: {{category.color}};">Catégorie: {{category.name}}</nb-card-header>
     
     <nb-card-body>
 
@@ -8,7 +9,9 @@
             <tr *ngFor="let n of notesPublic">
                 <th>{{ n.title }}</th>
                 <th>
-                    <button nbButton ghost status="info" shape="semi-round" size="small" [routerLink]="['../../display-note/' + n.id]">Voir</button>
+                    <button nbButton ghost status="info" shape="semi-round" size="small" [routerLink]="['../../display-note/' + n.id]">
+                        <nb-icon icon="eye-outline"></nb-icon>Voir
+                    </button>
                 </th>
             </tr>
         </table>
@@ -16,7 +19,9 @@
     </nb-card-body>
 
     <nb-card-footer class="cardFooter">
-        <button nbButton ghost status="primary" shape="semi-round" size="small" [routerLink]="['../../category']">Retour</button>
+        <button nbButton ghost status="primary" shape="semi-round" size="small" [routerLink]="['../../category']">
+            <nb-icon icon="arrowhead-left-outline"></nb-icon>Retour
+        </button>
     </nb-card-footer>
 
 </nb-card>

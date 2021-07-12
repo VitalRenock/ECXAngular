@@ -17,6 +17,7 @@ import { UserService } from 'src/app/shared/services/user.service';
 export class DisplayNoteComponent implements OnInit {
 
   note : Note = {}
+  noteCategory : string = ""
   compos : Compo[] = []
   previousRoute : string = ''
   currentUser : User = {}
@@ -39,10 +40,16 @@ export class DisplayNoteComponent implements OnInit {
     this.note = this.activatedroute.snapshot.data['noteResolue'];
     this.previousRoute = sessionStorage.getItem('previousRoute') ?? 'Error';
 
-    // On va rehcercher le créateur de la note
+    // On va rechercher le créateur de la note
     this.userService.getUserById(this.note.user_Id!).subscribe(
       (u : User) => {
         this.creator = u;
+      }
+    )
+
+    this.categoryService.getCategoryById(this.note.category_Id!).subscribe(
+      (c : Category) => {
+        this.noteCategory = c.short!;
       }
     )
 
@@ -51,24 +58,15 @@ export class DisplayNoteComponent implements OnInit {
       (compoList : Compo[]) => {
         this.compos = compoList;
 
-        // Pour chaque compos...
-        for (let i = 0; i < this.compos.length; i++) {
-          const element = this.compos[i];
-          
-          // On va rechrcher le nom des créateurs des composants
-          this.userService.getUserById(element.user_Id!).subscribe(
-            (u : User) => {
-              this.composCreators.push(u.nickname!);
-            }
-          );
 
-          // On va rechercher les couleurs
-          this.categoryService.getCategoryById(element.category_Id!).subscribe(
-            (c : Category) => {
-              this.composCategory.push(c);
-            }
-          );
-        }
+        this.test();
+        // // Pour chaque compos...
+        // for (let i = 0; i < this.compos.length; i++) {
+        //   const element = this.compos[i];
+          
+
+
+        // }
 
       }
     );
@@ -89,6 +87,27 @@ export class DisplayNoteComponent implements OnInit {
         this.router.navigate(['note/user-notes/' + this.currentUser.id]);
       }
     )
+  }
+
+  async test() {
+
+    for await (const iterator of this.compos) {
+
+      // On va rechrcher le nom des créateurs des composants
+      this.userService.getUserById(iterator.user_Id!).subscribe(
+        (u : User) => {
+          this.composCreators.push(u.nickname!);
+        }
+      );
+
+      // On va rechercher les couleurs
+      this.categoryService.getCategoryById(iterator.category_Id!).subscribe(
+        (c : Category) => {
+          this.composCategory.push(c);
+        }
+      );
+      
+    }
   }
 
 }

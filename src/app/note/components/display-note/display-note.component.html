@@ -1,7 +1,7 @@
 <nb-card status="basic">
 
     <nb-card-header style="position: relative;">
-        <nb-badge text={{note.category_Id}} status="warning" position="top right"></nb-badge>
+        <nb-badge text={{noteCategory}} status="warning" position="top right"></nb-badge>
         {{note.title}}
     </nb-card-header>
     <nb-card-body>
@@ -32,17 +32,19 @@
                 </p>
                 <br>
                 <p>
-                    Créateur: {{composCreators[i]}}
+                    @{{composCreators[i]}}
                 </p>
             </div>
 
         </div>
         
-        Créateur: {{creator.nickname}}
+        @{{creator.nickname}}
     </nb-card-body>
 
     <nb-card-footer>
-        <button nbButton ghost status="primary" shape="semi-round" size="small" [routerLink]="[previousRoute]">Retour</button>
+        <button nbButton ghost status="primary" shape="semi-round" size="small" [routerLink]="[previousRoute]">
+            <nb-icon icon="arrowhead-left-outline"></nb-icon>Retour
+        </button>
     </nb-card-footer>
 
 </nb-card>

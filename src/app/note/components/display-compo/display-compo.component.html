@@ -2,20 +2,32 @@
 
     <nb-card-header>{{compo.title}}</nb-card-header>
     <nb-card-body>
-        Type: {{compo.type}}
-        <br>
-        <div class="codeContent">
-            Content: {{compo.content}}
+
+        <div *ngIf="compo.content != ''">
+            Code: 
+            <div class="codeContent" >
+                {{compo.content}}
+            </div>
         </div>
         <br>
-        Description: {{compo.description}}
+
+        <p *ngIf="compo.description != ''">
+            {{compo.description}}
+        </p>
         <br>
-        Url: <a href={{compo.url}}>{{compo.url}}</a> 
+
+        <p *ngIf="compo.url != ''">
+            Url: <a href={{compo.url}}>{{compo.url}}</a>
+        </p>
+        <br>
+
+        @{{creator.nickname}}
     </nb-card-body>
 
     <nb-card-footer>
-        <button nbButton ghost status="primary" shape="semi-round" size="small" [routerLink]="[previousRoute]">Retour</button>
-        Créateur: {{creator.nickname}}
+        <button nbButton ghost status="primary" shape="semi-round" size="small" [routerLink]="[previousRoute]">
+            <nb-icon icon="arrowhead-left-outline"></nb-icon>Retour
+        </button>
     </nb-card-footer>
 
 </nb-card>
