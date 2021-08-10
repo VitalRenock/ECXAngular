@@ -7,6 +7,7 @@
 
         <nb-card-body>
             
+            <!-- Formulaire pour la note -->
             <table>
                 <tr>
                     <th><label for="">Titre: </label></th>
@@ -20,12 +21,21 @@
                     <th><label for="">Parent Id: </label></th>
                     <th><input nbInput type="number" formControlName="parentNote_IdControl"></th>
                 </tr>
+                <tr>
+                    <th><label for="">Catégorie: </label></th>
+                    <th>
+                        <nb-select id="noteCategory" [(selected)]="newNote.category_Id">
+                            <nb-option *ngFor="let c of categories" value="{{c.id}}">{{c.name}}</nb-option>
+                        </nb-select>
+                    </th>
+                </tr>
             </table>
             
+
             <br>
 
+            <!-- Formulaire pour un nouveau composant -->
             <!-- <app-create-compo></app-create-compo> -->
-            
             <nb-card formArrayName="compoList" accent="info" size="medium" *ngFor="let item of getItems().controls; let i = index;">
                 <nb-card-header>Nouveau composant {{i + 1}}</nb-card-header>
                 <nb-card-body>
@@ -39,10 +49,6 @@
                             <th><input nbInput type="text" formControlName="contentControl"></th>
                         </tr>
                         <tr>
-                            <th><label for="">Short: </label></th>
-                            <th><input nbInput type="text" formControlName="shortControl"></th>
-                        </tr>
-                        <tr>
                             <th><label for="">Description: </label></th>
                             <th><input nbInput type="text" formControlName="descriptionControl"></th>
                         </tr>
@@ -53,8 +59,19 @@
                         <tr>
                             <th><label for="">Public: </label></th>
                             <th><nb-toggle status="basic" formControlName="isPublicControl">Public</nb-toggle></th>
-                        </tr>              
+                        </tr>
+                        <tr>
+                            <th><label for="">Catégorie: </label></th>
+                            <th>
+                                <nb-select id="categoryCompo{{i}}">
+                                    <nb-option *ngFor="let c of categories" value="{{c.id}}">{{c.name}}</nb-option>
+                                </nb-select>
+                            </th>
+                        </tr>             
                     </table>
+
+
+
                 </nb-card-body>
                 <nb-card-footer>
                     <button nbButton type="button" (click)="removeItem(i)">Supprimer</button>

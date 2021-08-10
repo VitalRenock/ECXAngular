@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Category } from 'src/app/shared/models/category';
 import { Compo } from 'src/app/shared/models/compo';
 import { User } from 'src/app/shared/models/user';
+import { CategoryService } from 'src/app/shared/services/category.service';
 import { CompoService } from 'src/app/shared/services/compo.service';
 import { UserService } from 'src/app/shared/services/user.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-display-compo',
@@ -12,16 +15,22 @@ import { UserService } from 'src/app/shared/services/user.service';
 })
 export class DisplayCompoComponent implements OnInit {
 
-  compo : Compo = {}
-  creator : User = {}
-  previousRoute : string = ''
   currentUser : User = {}
+
+  compo : Compo = {}
+  category : Category = {}
+
+  creator : User = {}
+  prefixCreator : string = environment.prefixCreator
+  
+  previousRoute : string = ''
 
 
   constructor(
 
     private activatedroute : ActivatedRoute,
     private compoService : CompoService,
+    private categoryService : CategoryService,
     private userService : UserService,
     private router : Router
 
@@ -41,6 +50,13 @@ export class DisplayCompoComponent implements OnInit {
         this.creator = u;
       }
     );
+
+    // On va rechercher la catégorie du composant
+    this.categoryService.getCategoryById(this.compo.category_Id!).subscribe(
+      (c : Category) => {
+        this.category = c;
+      }
+    )
 
     // Je vais rechercher mon Utilisateur
     this.userService.currentUseSubject.subscribe(

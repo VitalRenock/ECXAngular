@@ -4,41 +4,53 @@
         <nb-badge text={{noteCategory}} status="warning" position="top right"></nb-badge>
         {{note.title}}
     </nb-card-header>
+    
     <nb-card-body>
-
         
         <!-- Loading Components -->
         <div *ngFor="let c of compos, let i = index">
-            <div class="displayCompo" [style.border-color]="composCategory[i].color">
+
+            <!-- Affichage général du composant -->
+            <div class="displayComponent" [style.border-color]="composCategory[i]?.color">
+
                 <!-- Affichage de la catégorie -->
                 <nb-tag-list>
-                    <nb-tag status="info" appearance="outline" size="tiny" text="{{composCategory[i].short!}}"></nb-tag>
+                    <nb-tag status="info" appearance="outline" size="tiny" text="{{composCategory[i]?.short}}"></nb-tag>
                 </nb-tag-list>
-                <h6>{{c.title}}</h6>
-                <div *ngIf="c.content != ''">
-                    <strong><i>Code:</i></strong>
-                    <div class="codeContent" style="position: relative;">
-                        
+
+                <!-- Affichage du titre -->
+                <h5>{{c.title}}</h5>
+
+                <!-- Affichage du contenu de Code -->
+                <div *ngIf="c.content">
+                    <strong><i>Code:</i></strong> 
+                    <p class="codeContent" >
                         {{c.content}}
-                    </div>
+                    </p>
                 </div>
-                <br>
-                <p>
+
+                <!-- Affichage de la description -->
+                <p *ngIf="c.description">
                     {{c.description}}
                 </p>
-                <br>
-                <p *ngIf="c.url != ''">
+
+                <!-- Affichage de l'url' -->
+                <p *ngIf="c.url">
+                    Lien(s) utile(s):
+                    <br>
                     <a href={{c.url}}>{{c.url}}</a>
                 </p>
-                <br>
-                <p>
-                    @{{composCreators[i]}}
-                </p>
+
+                <!-- Affichage du créateur -->
+                <div class="displayCompoCreator">{{prefixCreator}} {{composCreators[i]}}</div>
+
             </div>
 
         </div>
+
         
-        @{{creator.nickname}}
+        
+        {{prefixCreator}} {{creator.nickname}}
     </nb-card-body>
 
     <nb-card-footer>

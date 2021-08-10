@@ -6,7 +6,9 @@ export const environment = {
   production: false,
 
   // Url de l'api (variable disponoble dans toute l'application)
-  urlApi: `https://localhost:44391/api/`
+  urlApi: `https://localhost:44391/api/`,
+
+  prefixCreator: 'par'
 };
 
 /*

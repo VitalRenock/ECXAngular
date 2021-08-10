@@ -1,27 +1,46 @@
 <nb-card status="basic">
 
-    <nb-card-header>{{compo.title}}</nb-card-header>
+    <!-- Affichage du titre -->
+    <!-- <nb-card-header>{{compo.title}}</nb-card-header> -->
+
     <nb-card-body>
 
-        <div *ngIf="compo.content != ''">
-            Code: 
-            <div class="codeContent" >
-                {{compo.content}}
+        <!-- Affichage général du composant -->
+        <div class="displayComponent" [style.border-color]="category?.color">
+
+            <!-- Affichage de la catégorie -->
+            <nb-tag-list>
+                <nb-tag status="info" appearance="outline" size="tiny" text="{{category?.short}}"></nb-tag>
+            </nb-tag-list>
+
+            <!-- Affichage du titre -->
+            <h5>{{compo.title}}</h5>
+
+            <!-- Affichage du contenu de Code -->
+            <div *ngIf="compo.content">
+                <strong><i>Code:</i></strong> 
+                <p class="codeContent" style="color: ghostwhite;">
+                    {{compo.content}}
+                </p>
             </div>
+            
+            <!-- Affichage de la description -->
+            <p *ngIf="compo.description">
+                {{compo.description}}
+            </p>
+            
+            <!-- Affichage de l'url' -->
+            <p *ngIf="compo.url">
+                Lien(s) utile(s):
+                <br>
+                <a href={{compo.url}}>{{compo.url}}</a>
+            </p>
+            
+            <!-- Affichage du créateur -->
+            <div class="displayCompoCreator">{{prefixCreator}} {{creator.nickname}}</div>
+            
         </div>
-        <br>
 
-        <p *ngIf="compo.description != ''">
-            {{compo.description}}
-        </p>
-        <br>
-
-        <p *ngIf="compo.url != ''">
-            Url: <a href={{compo.url}}>{{compo.url}}</a>
-        </p>
-        <br>
-
-        @{{creator.nickname}}
     </nb-card-body>
 
     <nb-card-footer>

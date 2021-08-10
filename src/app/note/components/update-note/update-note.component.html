@@ -6,6 +6,7 @@
         
         <nb-card-body>
             
+            <!-- Partie du formulaire pour la Note -->
             <table>
                 <!-- <colgroup>
                     <col style="background-color:lightsteelblue">
@@ -19,6 +20,19 @@
                     <th><nb-toggle status="basic" formControlName="isPublicControl"></nb-toggle></th>
                 </tr>
             </table>
+
+            <!-- Partie du formulaire pour les Composants -->
+            <div *ngFor="let c of compos" class="displayComponent">
+
+                <h6>{{c.title}}</h6>
+
+                <div *ngIf="c.content" class="codeContent">{{c.content}}</div>
+
+                <p *ngIf="c.description">{{c.description}}</p>
+
+                <a *ngIf="c.url">{{c.url}}</a>
+
+            </div>
 
         </nb-card-body>
         

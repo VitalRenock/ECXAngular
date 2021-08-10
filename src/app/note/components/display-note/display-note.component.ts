@@ -8,6 +8,7 @@ import { CategoryService } from 'src/app/shared/services/category.service';
 import { CompoService } from 'src/app/shared/services/compo.service';
 import { NoteService } from 'src/app/shared/services/note.service';
 import { UserService } from 'src/app/shared/services/user.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-display-note',
@@ -16,23 +17,24 @@ import { UserService } from 'src/app/shared/services/user.service';
 })
 export class DisplayNoteComponent implements OnInit {
 
-  note : Note = {}
-  noteCategory : string = ""
-  compos : Compo[] = []
-  previousRoute : string = ''
-  currentUser : User = {}
-  creator : User = {}
-  composCreators : string[] = []
-  composCategory : Category[] = []
+  note: Note = {}
+  noteCategory: string = ""
+  compos: Compo[] = []
+  previousRoute: string = ''
+  currentUser: User = {}
+  creator: User = {}
+  prefixCreator : string = environment.prefixCreator
+  composCreators: string[] = []
+  composCategory: Category[] = []
 
   constructor(
-    
-    private activatedroute : ActivatedRoute,
-    private compoService : CompoService,
-    private noteService : NoteService,
-    private userService : UserService,
-    private categoryService : CategoryService,
-    private router : Router
+
+    private activatedroute: ActivatedRoute,
+    private compoService: CompoService,
+    private noteService: NoteService,
+    private userService: UserService,
+    private categoryService: CategoryService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -42,37 +44,50 @@ export class DisplayNoteComponent implements OnInit {
 
     // On va rechercher le créateur de la note
     this.userService.getUserById(this.note.user_Id!).subscribe(
-      (u : User) => {
+      (u: User) => {
         this.creator = u;
       }
     )
 
+    // On va rechercher la catégorie de la Note
     this.categoryService.getCategoryById(this.note.category_Id!).subscribe(
-      (c : Category) => {
+      (c: Category) => {
         this.noteCategory = c.short!;
       }
     )
 
     // On va rechercher les composants de ma note
     this.compoService.getComponentsByNote(this.note.id ?? 0).subscribe(
-      (compoList : Compo[]) => {
+      (compoList: Compo[]) => {
         this.compos = compoList;
 
 
-        this.test();
-        // // Pour chaque compos...
-        // for (let i = 0; i < this.compos.length; i++) {
-        //   const element = this.compos[i];
-          
+        // Pour chaque compos...
+        for (let i = 0; i < this.compos.length; i++) {
+          const element = this.compos[i];
 
+          // On va rechrcher le nom des créateurs des composants
+          this.userService.getUserById(element.user_Id!).subscribe(
+            (u: User) => {
+              this.composCreators.push(u.nickname!);
+            }
+          );
 
-        // }
+          // On va rechercher les couleurs
+          this.categoryService.getCategoryById(element.category_Id!).subscribe(
+            (c: Category) => {
+              this.composCategory.push(c);
+            }
+          );
+
+        }
+        // this.test();
 
       }
     );
 
     this.userService.currentUseSubject.subscribe(
-      (u : User) => {
+      (u: User) => {
         this.currentUser = u;
       }
     );
@@ -80,7 +95,7 @@ export class DisplayNoteComponent implements OnInit {
 
   }
 
-  deleteNote(id : number) {
+  deleteNote(id: number) {
 
     this.noteService.deleteNote(id).subscribe(
       () => {
@@ -91,23 +106,24 @@ export class DisplayNoteComponent implements OnInit {
 
   async test() {
 
-    for await (const iterator of this.compos) {
+    // for await (const iterator of this.compos) {
 
-      // On va rechrcher le nom des créateurs des composants
-      this.userService.getUserById(iterator.user_Id!).subscribe(
-        (u : User) => {
-          this.composCreators.push(u.nickname!);
-        }
-      );
+    //   // On va rechrcher le nom des créateurs des composants
+    //   this.userService.getUserById(iterator.user_Id!).subscribe(
+    //     (u: User) => {
+    //       this.composCreators.push(u.nickname!);
+    //     }
+    //   );
 
-      // On va rechercher les couleurs
-      this.categoryService.getCategoryById(iterator.category_Id!).subscribe(
-        (c : Category) => {
-          this.composCategory.push(c);
-        }
-      );
-      
-    }
+    //   // On va rechercher les couleurs
+    //   this.categoryService.getCategoryById(iterator.category_Id!).subscribe(
+    //     (c: Category) => {
+    //       this.composCategory.push(c);
+    //     }
+    //   );
+
+    // }
+
   }
 
 }

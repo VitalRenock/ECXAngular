@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CompoResolver } from '../shared/tools/compo.resolver';
 import { ComposResolver } from '../shared/tools/compos.resolver';
+import { AuthGuard } from '../shared/tools/guards/auth.guard';
 import { NoteResolver } from '../shared/tools/note.resolver';
 import { NotesResolver } from '../shared/tools/notes.resolver';
 import { CategoryComponent } from './components/category/category.component';
@@ -20,19 +21,22 @@ const routes: Routes = [
   // J'ajoute un Resolver en fournissant comme valeur au paramètre 'resolve' un objet (ici nommé'notesResolues') qui sera remplis par le Resolver lors de la navigation
   { path: "", children: [
     
-    // Note Routing
+    // Note 
+    // Routing Public
     { path: "category", component: CategoryComponent },
-    { path: "create-note", component : CreateNoteComponent },
-    { path: "display-note/:id", resolve: { noteResolue : NoteResolver }, component: DisplayNoteComponent },
-    { path: "update-note/:id", resolve: { noteResolue : NoteResolver }, component: UpdateNoteComponent },
     { path: "public-notes/:categoryId", resolve: { notesResolues : NotesResolver }, component: PublicNotesComponent },
-    { path: "user-notes/:userId", resolve:{ notesResolues : NotesResolver }, component: UserNotesComponent },
+    { path: "display-note/:id", resolve: { noteResolue : NoteResolver }, component: DisplayNoteComponent },
+    
+    // Routing Privé
+    { path: "create-note", canActivate: [AuthGuard], component : CreateNoteComponent },
+    { path: "update-note/:id", canActivate: [AuthGuard], resolve: { noteResolue : NoteResolver }, component: UpdateNoteComponent },
+    { path: "user-notes/:userId", canActivate: [AuthGuard], resolve:{ notesResolues : NotesResolver }, component: UserNotesComponent },
     
     // Compo Routing
-    { path: "create-compo", component : CreateCompoComponent },
-    { path: "user-compos/:userId", resolve: { composResolus : ComposResolver }, component: UserComposComponent },
-    { path: "display-compo/:compoId", resolve: { compoResolus : CompoResolver }, component: DisplayCompoComponent },
-    { path: "update-compo/:compoId", resolve: { compoResolus : CompoResolver }, component: UpdateCompoComponent }
+    { path: "create-compo", canActivate: [AuthGuard], component : CreateCompoComponent },
+    { path: "user-compos/:userId", canActivate: [AuthGuard], resolve: { composResolus : ComposResolver }, component: UserComposComponent },
+    { path: "display-compo/:compoId", canActivate: [AuthGuard], resolve: { compoResolus : CompoResolver }, component: DisplayCompoComponent },
+    { path: "update-compo/:compoId", canActivate: [AuthGuard], resolve: { compoResolus : CompoResolver }, component: UpdateCompoComponent }
   ]}
 ];
 

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -57,16 +57,7 @@ export class CompoService {
 
 createCompo(newCompo : Compo) : Observable<number> {
 
-  // let form = {
-  //   title: newCompo.title,
-  //   content: newCompo.content,
-  //   short: newCompo.short,
-  //   description: newCompo.description,
-  //   url: newCompo.url,
-  //   isPublic: newCompo.isPublic,
-  //   user_Id: newCompo.user_Id
-  // }
-
+  console.log(newCompo);
   return this.httpClient.post<number>(environment.urlApi + this.urlController + 'Create', newCompo);
 }
 
@@ -109,6 +100,17 @@ setVisibility(id : number, isPublic : boolean) {
   return this.httpClient.put(environment.urlApi + this.urlController + 'SetVisibility', form);
 }
 
+switchComposOrder(noteId : number, compo1Id : number, compo2Id : number) {
+
+  let form = {
+    note_Id: noteId,
+    component1_Id: compo1Id,
+    component2_Id: compo2Id
+  }
+
+  return this.httpClient.put(environment.urlApi + this.urlController + 'SwitchComponentsOrder', form);
+}
+
 //#endregion
 
 //#region DELETE Methods
@@ -116,6 +118,15 @@ setVisibility(id : number, isPublic : boolean) {
 deleteCompo(id : number) {
 
   return this.httpClient.delete(environment.urlApi + this.urlController + 'Delete/' + id);
+}
+
+removeComponentToNote(noteId: number,  componentId : number) {
+
+  let params = new HttpParams();
+  params.set('noteId', noteId);
+  params.set('componentId', componentId);
+
+  return this.httpClient.delete(environment.urlApi + this.urlController + 'RemoveComponentToNote', { params: params });
 }
 
 //#endregion

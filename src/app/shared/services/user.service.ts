@@ -144,6 +144,7 @@ export class UserService {
     this.currentUser = undefined;
     localStorage.clear();
     this.emitUser();
+    this.router.navigate(['home']);
   }
 
   decodeToken(token : string) : number {

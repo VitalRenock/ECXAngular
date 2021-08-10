@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Compo } from 'src/app/shared/models/compo';
 import { Note } from 'src/app/shared/models/note';
 import { User } from 'src/app/shared/models/user';
+import { CompoService } from 'src/app/shared/services/compo.service';
 import { NoteService } from 'src/app/shared/services/note.service';
 import { UserService } from 'src/app/shared/services/user.service';
 
@@ -13,14 +15,17 @@ import { UserService } from 'src/app/shared/services/user.service';
 })
 export class UpdateNoteComponent implements OnInit {
 
-  note : Note = {}
+  currentUser : User = {};
+  note : Note = {};
+  compos : Compo[] = [];
   updateNoteFG : FormGroup = this.formBuilder.group({});
-  currentUser : User = {}
+
 
   constructor(
 
-    private noteService : NoteService,
     private userService : UserService,
+    private noteService : NoteService,
+    private compoService : CompoService,
     private activatedRoute : ActivatedRoute,
     private formBuilder : FormBuilder,
     private router : Router
@@ -29,15 +34,6 @@ export class UpdateNoteComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // On recois la note
-    this.note = this.activatedRoute.snapshot.data['noteResolue'];
-
-    // Création du formulaire
-    this.updateNoteFG = this.formBuilder.group({
-      titleControl: [this.note.title, Validators.required],
-      isPublicControl: [this.note.isPublic, Validators.required],
-    });
-
     // Soucription à l'utilisateur courant
     this.userService.currentUseSubject.subscribe(
       (u : User) => {
@@ -45,6 +41,22 @@ export class UpdateNoteComponent implements OnInit {
       }
     );
     this.userService.emitUser();
+
+    // On recois la note
+    this.note = this.activatedRoute.snapshot.data['noteResolue'];
+
+    // On va rechercher les composants de la note
+    this.compoService.getComponentsByNote(this.note.id!).subscribe(
+      (compos : Compo[]) => {
+        this.compos = compos;
+      }
+    )
+
+    // Création du formulaire
+    this.updateNoteFG = this.formBuilder.group({
+      titleControl: [this.note.title, Validators.required],
+      isPublicControl: [this.note.isPublic, Validators.required],
+    });
 
   }
 
