@@ -13,11 +13,6 @@
             <!-- Affichage général du composant -->
             <div class="displayComponent" [style.border-color]="composCategory[i]?.color">
 
-                <!-- Affichage de la catégorie -->
-                <nb-tag-list>
-                    <nb-tag status="info" appearance="outline" size="tiny" text="{{composCategory[i]?.short}}"></nb-tag>
-                </nb-tag-list>
-
                 <!-- Affichage du titre -->
                 <h5>{{c.title}}</h5>
 
@@ -42,7 +37,9 @@
                 </p>
 
                 <!-- Affichage du créateur -->
-                <div class="displayCompoCreator">{{prefixCreator}} {{composCreators[i]}}</div>
+                <div class="displayCompoCreator">
+                    {{prefixCreator}} {{composCreators[i]}} - {{composCategory[i]?.short}}
+                </div>
 
             </div>
 

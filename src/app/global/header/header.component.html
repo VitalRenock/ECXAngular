@@ -1,13 +1,24 @@
 <div class="headerMenu">
 
+    <!-- Titre -->
     <div class="homeLinkBloc">
         <a class="homeLink" [routerLink]="['home']">DropNote</a>
     </div>
     
+    <!-- Menu Notes et Composants -->
     <nb-button-group ghost>
         <button nbButtonToggle [routerLink]="['note/category']">Catégories</button>
         <button nbButtonToggle *ngIf="currentUser != null" [routerLink]="['note/user-notes/' + currentUser.id]">Mes notes</button>
         <button nbButtonToggle *ngIf="currentUser != null" [routerLink]="['note/user-compos/' + currentUser.id]">Mes Composants</button>
     </nb-button-group>
+
+    <div class="userMenu">
+        <button nbButton outline [nbContextMenu]="menuList">
+            <nb-icon icon="people" status="warning" ></nb-icon>{{currentUser?.nickname}}
+        </button>
+        <button nbButton outline *ngIf="currentUser?.nickname != null" (click)="logout()">
+          <nb-icon icon="log-out-outline" status="danger"></nb-icon>
+        </button>
+      </div>
 
 </div>

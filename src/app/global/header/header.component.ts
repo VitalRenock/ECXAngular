@@ -4,21 +4,25 @@ import { User } from 'src/app/shared/models/user';
 import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
-  selector: 'app-nav',
-  templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.scss']
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss']
 })
-export class NavComponent implements OnInit {
+export class HeaderComponent implements OnInit {
+
+  // menuList : NbMenuItem[] = []
+  // currentUser? : User
 
   menuList : NbMenuItem[] = []
-  // currentUser? : User
-  currentUser : User = {}
-
+  currentUser? : User
+  // currentUser : User = {}
+  
   constructor(
 
     private userService : UserService
 
-    ) { }
+  ) { }
+
 
   ngOnInit(): void {
     
@@ -32,8 +36,9 @@ export class NavComponent implements OnInit {
       );
       
     }
-    
-  // Méthode pour définir le Menu Utilisateur en fonction du User dans le service
+
+
+    // Méthode pour définir le Menu Utilisateur en fonction du User dans le service
   setMenu() {
 
     switch (this.currentUser?.role) {
@@ -57,11 +62,11 @@ export class NavComponent implements OnInit {
         ];
         break;
     }
-
   }
 
-  logout() {
 
+  logout() {
+    
     this.userService.logout();
   }
 
